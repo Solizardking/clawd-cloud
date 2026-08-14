@@ -1,7 +1,15 @@
 {
   "name": "clawd-core-ai",
   "private": true,
-  "description": "Enterprise Clawd Core AI stack — identity, agents, MCP, wallet, router, ZK",
+  "description": "Public Clawd Core AI stack — lobster-native Solana agents. Clawd is the identity. Helius is the pipe.",
+  "homepage": "https://github.com/Solizardking/core-ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solizardking/core-ai.git"
+  },
+  "bin": {
+    "claw": "./claw"
+  },
   "scripts": {
     "check:structure": "node scripts/check-structure.mjs",
     "check:secrets": "node scripts/secret-scan.mjs",

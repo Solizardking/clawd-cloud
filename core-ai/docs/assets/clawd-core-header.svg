@@ -138,7 +138,8 @@
       <text x="110" y="142" fill="#9945FF">clawd-cli</text>
       <text x="214" y="142" fill="#ff7a4a">clawd-plugin</text>
       <text x="348" y="142" fill="#c4a6ff">membrain</text>
-      <text x="450" y="142" fill="#14F195">grok-4.6</text>
+      <text x="450" y="142" fill="#14F195">./claw</text>
+      <text x="530" y="142" fill="#ff7a4a">$CLAWD</text>
     </g>
   </g>
 

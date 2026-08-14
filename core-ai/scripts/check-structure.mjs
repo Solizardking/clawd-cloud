@@ -43,10 +43,25 @@ function checkEntry(entry, requiredFlag) {
 for (const entry of required) checkEntry(entry, true);
 for (const entry of additional) checkEntry(entry, false);
 
+const files = manifest.files ?? [];
+for (const rel of files) {
+  const abs = join(root, rel);
+  if (!existsSync(abs)) {
+    failures.push(`REQUIRED missing file: ${rel}`);
+    continue;
+  }
+  if (statSync(abs).isDirectory()) {
+    failures.push(`${rel} should be a file`);
+  }
+  if (!isMapped(rel)) {
+    failures.push(`README does not map file: ${rel}`);
+  }
+}
+
 if (failures.length) {
   console.error('Structure check failed:\n' + failures.map((f) => `  - ${f}`).join('\n'));
   process.exit(1);
 }
 console.log(
-  `Structure OK — ${required.length} required and ${additional.length} additional packages mapped.`,
+  `Structure OK — ${required.length} packages, ${additional.length} additional, ${files.length} root files mapped.`,
 );

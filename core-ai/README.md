@@ -2,97 +2,123 @@
 
 <img src="docs/assets/clawd-core-header.svg" alt="Clawd Core — lobster-native Solana agent stack" width="100%">
 
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&pause=900&color=14F195&center=true&vCenter=true&width=920&height=48&lines=clawd+--plugin-dir+.%2Fclawd-plugin;.%2Fclaw+code+%22mint+a+spawnling%22;npx+clawd-mcp%40latest;Clawd+is+the+identity.+Helius+is+the+pipe.;grok-4.6+%C2%B7+tailclawd+:4402+%C2%B7+$CLAWD" alt="Clawd Core typing banner">
+
+<img src="docs/assets/clawd-ticker.svg" alt="Scrolling Core AI package ticker" width="100%">
+
 <p>
   <a href="https://phantom.com/tokens/solana/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump"><img src="https://img.shields.io/badge/Buy_%24CLAWD-Phantom-9945FF?style=for-the-badge&logo=solana&logoColor=14F195" alt="Buy $CLAWD"></a>
+  <a href="https://dexscreener.com/solana/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump"><img src="https://img.shields.io/badge/Chart-Dexscreener-14F195?style=for-the-badge" alt="Dexscreener"></a>
+  <a href="https://jup.ag/swap/SOL-8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump"><img src="https://img.shields.io/badge/Swap-Jupiter-blue?style=for-the-badge" alt="Jupiter"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d1117?style=for-the-badge" alt="MIT"></a>
-  <a href="../SECURITY.md"><img src="https://img.shields.io/badge/Security-advisories-red?style=for-the-badge" alt="Security"></a>
+  <a href="SECURITY.md"><img src="https://img.shields.io/badge/Security-advisories-red?style=for-the-badge" alt="Security"></a>
 </p>
 
 ```text
 Token   $CLAWD · 8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump
-Repo    github.com/Solizardking/clawd-cloud · tree core-ai/
+Public  github.com/Solizardking/core-ai
 ```
 
 </div>
 
 # Clawd Core AI
 
-Enterprise map of the Clawd Core stack. **Clawd Core is the identity. Helius is the pipe.**
+Public lobster-native Solana agent stack. **Clawd is the identity. Helius is the pipe.**
 
-This directory is what GitHub deploys. Every required package is listed in [`MANIFEST.json`](./MANIFEST.json) and must appear in the tables below. CI runs `npm run verify` from this folder: structure map, secret scan, and keyless unit tests.
+This repository is Core AI as its own GitHub product — not a nested folder. Clone it, run `./claw`, compile skills, talk to the chain.
 
-## Architecture
+<img src="docs/assets/clawd-boot.svg" alt="Animated Core AI boot terminal" width="100%">
 
-Agents on top. Identity and skills in the middle. Chain, payments, and memory at the edge.
+## Live map
+
+Agents on top. Identity in the shell. Chain, pay, and memory at the edge. Packets never stop.
+
+<div align="center">
+  <img src="docs/assets/clawd-core-map.svg" alt="Animated Clawd Core architecture map" width="100%">
+</div>
 
 ```mermaid
 %%{init: {"theme":"dark","themeVariables":{"primaryColor":"#142033","primaryTextColor":"#14F195","lineColor":"#9945FF","secondaryColor":"#0d1117","tertiaryColor":"#1e2a44","fontFamily":"ui-monospace, Menlo, monospace"}}}%%
 flowchart TB
   subgraph AGENTS["01  AGENTS"]
+    CLAW["./claw"]
     CC["clawd-code"]
     CA["clawd-agents"]
     TUI["clawd-tui"]
     V3["v3"]
-    CG["clawd-grok"]
-    PA["clawd-perps-agent"]
   end
   subgraph IDENTITY["02  IDENTITY"]
     CORE["clawd-core"]
     CHAR["clawd-character"]
     GOALS["clawd-goals"]
     CON["constitution"]
-    KB["knowledge"]
   end
   subgraph COREPKG["03  CLAWD CORE"]
     PL["clawd-plugin"]
     SK["clawd-skills"]
     MCP["clawd-mcp"]
-    CLI["clawd-cli"]
-    CUR["clawd-cursor"]
     AG[".agents"]
-    MKT[".clawd-plugin"]
   end
   subgraph EDGE["04  CHAIN · PAY · MEMORY"]
     CONN["clawd-connectors"]
     WAL["clawd-wallet"]
     RTR["clawd-router"]
     ZK["zk-primitives"]
-    PUMP["mcp-server"]
-    SOL["solana-mcp"]
-    MB["membrain"]
-  end
-  subgraph OPS["05  OPS"]
-    GH[".github"]
-    SCR["scripts"]
     TAIL["tailclawd"]
-    DOCS["docs"]
   end
+  CLAW --> V3
   CC --> PL
-  CA --> CHAR
-  TUI --> MCP
   PL --> SK
   SK --> AG
   MCP --> CONN
   CONN --> WAL
   RTR --> WAL
   CORE --> CON
-  GOALS --> CORE
   TAIL --> CORE
 ```
 
-Animated map: [`docs/assets/clawd-core-map.svg`](./docs/assets/clawd-core-map.svg).
+## Quick start
+
+```bash
+git clone https://github.com/Solizardking/core-ai.git
+cd core-ai
+chmod +x claw
+npm run verify
+./claw --help
+```
+
+Agent loop:
+
+```bash
+clawd --plugin-dir ./clawd-plugin
+```
+
+MCP-only in `.clawd/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "clawd": {
+      "command": "npx",
+      "args": ["clawd-mcp@latest"]
+    }
+  }
+}
+```
+
+Copy [`.env.example`](./.env.example). Never commit a filled `.env`. Keys live in `~/.clawd/config.json`.
 
 ## Directory map
 
-Canonical list. Paths are relative to `core-ai/`.
+Canonical list. Enforced by [`MANIFEST.json`](./MANIFEST.json) and `npm run verify`.
 
 ### Required packages
 
 | Path | Layer | What it is | How to run |
 |---|---|---|---|
 | [`.agents`](./.agents) | generated | Compiled skills and prompt variants from `clawd-skills` | `npm run compile-skills` — do not edit by hand |
-| [`.clawd-plugin`](./.clawd-plugin) | plugin | Marketplace descriptor for the plugin bundle | read [`marketplace.json`](./.clawd-plugin/marketplace.json) |
-| [`.github`](./.github) | ops | Package-level workflow templates | live Actions are at repo-root `.github/` |
+| [`.clawd-plugin`](./.clawd-plugin) | plugin | Marketplace descriptor for the plugin bundle | [`marketplace.json`](./.clawd-plugin/marketplace.json) |
+| [`.github`](./.github) | ops | Public GitHub Actions for this repo | CI on `main` / `newnew` |
 | [`clawd-agents`](./clawd-agents) | agents | x402, PumpFun, Go, and Grok agent runtimes | see each subdirectory README |
 | [`clawd-character`](./clawd-character) | identity | Eliza-compatible Clawd persona JSON | `node --test clawd-character/tests/*.test.mjs` |
 | [`clawd-code`](./clawd-code) | agents | Solana-native AI coding CLI, paper-gated perps | `cd clawd-code && npm install && npm run build` |
@@ -110,141 +136,64 @@ Canonical list. Paths are relative to `core-ai/`.
 | [`mcp-server`](./mcp-server) | edge | Pump SDK MCP (builds txs, does not submit) | `npm run mcp:pump:start` |
 | [`scripts`](./scripts) | ops | Skill compiler, structure check, secret scan | `npm run verify` |
 | [`tailclawd`](./tailclawd) | ops | Operator dashboard — sessions, metrics, health | `npm run tailclawd:start` → `http://127.0.0.1:4402` |
-| [`v3`](./v3) | agents | Next-gen unified Clawd runtime scaffold | `cd v3 && npm install && npm start` |
+| [`v3`](./v3) | agents | Next-gen unified Clawd runtime scaffold | `./claw` or `cd v3 && npm start` |
 | [`zk-primitives`](./zk-primitives) | edge | Light Protocol ZK: nullifiers, Groth16, compressed state | see [`zk-primitives/README.md`](./zk-primitives/README.md) |
+
+### Root files
+
+| File | What it is |
+|---|---|
+| [`claw`](./claw) | Public operator launcher → `v3` runtime |
+| [`.gitignore`](./.gitignore) | Secrets, `node_modules`, build output |
+| [`.npmrc`](./.npmrc) | npm publish policy (`minimum-release-age`) |
+| [`AGENTS.md`](./AGENTS.md) | Layer A harness for Clawd-compatible agents |
+| [`CLAUDE.md`](./CLAUDE.md) | Compatibility shim |
+| [`CLAWD.md`](./CLAWD.md) | Canonical Clawd operator instructions |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Signed-commit guidance + `npm run verify` |
+| [`glama.json`](./glama.json) | Glama MCP maintainer record |
+| [`LICENSE`](./LICENSE) | MIT |
+| [`package.json`](./package.json) | Workspace scripts (`verify`, `catalog`, MCP helpers) |
+| [`package-lock.json`](./package-lock.json) | Root lockfile |
+| [`README.md`](./README.md) | This map |
+| [`versions.json`](./versions.json) | Skill / prompt version pins |
 
 ### Also in this tree
 
 | Path | Layer | What it is | How to run |
 |---|---|---|---|
-| [`clawd-cli`](./clawd-cli) | core | Helius account setup, DAS/RPC, staking, ZK compression | `npm install -g clawd-cli` then `clawd-cli config set-api-key <key>` |
+| [`clawd-cli`](./clawd-cli) | core | Helius account setup, DAS/RPC, staking, ZK compression | `npm install -g clawd-cli` |
 | [`clawd-cursor`](./clawd-cursor) | plugin | Cursor skills, rules, and MCP config | Cursor marketplace / local plugin dir |
 | [`clawd-grok`](./clawd-grok) | agents | Bun-native Grok runtime (default `grok-4.6`) | `cd clawd-grok && bun install && bun run dev` |
 | [`clawd-perps-agent`](./clawd-perps-agent) | agents | Phoenix, Vulcan, Imperial, TWAMM, Telegram | `cd clawd-perps-agent && npm install && npm run build` |
 | [`membrain`](./membrain) | memory | Selective memory daemon — gRPC `:9090` | `cd membrain && make build && ./bin/membraned` |
 | [`solana-mcp`](./solana-mcp) | edge | Solana docs MCP — RAG + canonical retrieval | `npm run mcp:solana:dev` → `http://localhost:8080/mcp` |
-| [`docs`](./docs) | ops | ADRs and SVG maps | read-only |
+| [`docs`](./docs) | ops | ADRs and animated SVG maps | read-only |
 | [`convex`](./convex) | ops | Convex helpers used by gateway surfaces | package-local |
-
-## Quick start
-
-```bash
-git clone https://github.com/Solizardking/clawd-cloud.git
-cd clawd-cloud/core-ai
-npm run verify
-```
-
-Install per package. There is no single repo-wide `npm install` for every runtime.
-
-```bash
-cd clawd-mcp && pnpm install && pnpm build
-cd ../clawd-cli && pnpm install && pnpm build
-cd ../mcp-server && npm install && npm run build
-cd ../solana-mcp && pnpm install && pnpm build
-```
-
-Agent loop:
-
-```bash
-clawd --plugin-dir ./clawd-plugin
-```
-
-Or MCP-only in `.clawd/settings.json`:
-
-```json
-{
-  "mcpServers": {
-    "clawd": {
-      "command": "npx",
-      "args": ["clawd-mcp@latest"]
-    }
-  }
-}
-```
-
-Set `HELIUS_API_KEY` (or `clawd-cli config set-api-key` / `clawd-cli signup`). Keys live in `~/.clawd/config.json`. Copy [`.env.example`](./.env.example) for local overrides — never commit a filled `.env`.
 
 ## MCP servers
 
 | Server | Path / package | Transport | Command / URL |
 |---|---|---|---|
-| Clawd MCP | [`clawd-mcp`](./clawd-mcp) / `clawd-mcp@latest` | stdio | `npx clawd-mcp@latest` |
+| Clawd MCP | [`clawd-mcp`](./clawd-mcp) | stdio | `npx clawd-mcp@latest` |
 | Pump MCP | [`mcp-server`](./mcp-server) | stdio or HTTP | `npm run mcp:pump:start` |
 | Solana Docs MCP | [`solana-mcp`](./solana-mcp) | HTTP `:8080` | `npm run mcp:solana:dev` |
-| Connectors | [`clawd-connectors`](./clawd-connectors) | HTTP MCP | see `.mcp.json` in that package |
+| Connectors | [`clawd-connectors`](./clawd-connectors) | HTTP MCP | see `.mcp.json` |
 | ZK Compression | [`zk-primitives`](./zk-primitives) + external | HTTP | `https://www.zkcompression.com/mcp` |
-
-## Clawd MCP tools
-
-Nine routed domains plus `expandResult`. Pass a Helius action name in `action`.
-
-| Tool | Use for |
-|---|---|
-| `clawdAccount` | Signup, API keys, plans, billing |
-| `clawdWallet` | Balances, holdings, identity, wallet history |
-| `clawdAsset` | DAS assets, NFTs, collections, proofs |
-| `clawdTransaction` | Parsed txs and wallet activity |
-| `clawdChain` | Raw accounts, blocks, stake, priority fees |
-| `clawdStreaming` | Webhooks and live subscriptions |
-| `clawdKnowledge` | Docs, guides, rate limits, troubleshooting |
-| `clawdWrite` | SOL/token transfers and staking |
-| `clawdCompression` | ZK compression state and proofs |
-| `expandResult` | Expand summary-first payloads |
-
-## Skills
-
-Canonical source is [`clawd-skills/`](./clawd-skills). Compiler output lands in [`.agents/skills/`](./.agents) and `clawd-mcp/system-prompts/`.
-
-```bash
-npx tsx scripts/compile-skills.ts
-```
-
-| Skill | Directory | Invoke |
-|---|---|---|
-| Clawd Core | [`clawd-skills/clawd`](./clawd-skills/clawd) | `/clawd:build` |
-| Clawd DFlow | [`clawd-skills/clawd-dflow`](./clawd-skills/clawd-dflow) | `/clawd:dflow` |
-| Clawd Jupiter | [`clawd-skills/clawd-jupiter`](./clawd-skills/clawd-jupiter) | `/clawd:jupiter` |
-| Clawd Phantom | [`clawd-skills/clawd-phantom`](./clawd-skills/clawd-phantom) | `/clawd:phantom` |
-| Clawd OKX | [`clawd-skills/clawd-okx`](./clawd-skills/clawd-okx) | `/clawd:okx` |
-| SVM | [`clawd-skills/svm`](./clawd-skills/svm) | `/clawd:svm` |
 
 ## Identity and law
 
-- [`constitution/`](./constitution) — values plus the Three On-Chain Laws (never harm, earn your existence, never deceive). Spawn pipelines should record `sha256(three-laws.md)`.
+- [`constitution/`](./constitution) — never harm, earn your existence, never deceive. Spawn pipelines record `sha256(three-laws.md)`.
 - [`clawd-character/`](./clawd-character) — persona JSON loaded at spawn.
 - [`clawd-goals/`](./clawd-goals) — active missions (`active: true`) injected into prompts.
-- [`knowledge/`](./knowledge) — operator memory: facts, gotchas, decisions.
+- [`knowledge/`](./knowledge) — operator memory.
 
-## Environment
-
-Never commit keys. Telemetry is off unless you opt in.
-
-| Variable | Used by | Purpose |
-|---|---|---|
-| `HELIUS_API_KEY` | `clawd-cli`, `clawd-mcp`, connectors | Helius cloud API |
-| `HELIUS_NETWORK` | `clawd-cli`, `clawd-mcp` | `mainnet` / `devnet` |
-| `SOLANA_RPC_URL` | `mcp-server`, Clawd Code | Single RPC endpoint |
-| `XAI_API_KEY` | `clawd-code`, `clawd-grok` | xAI / Grok |
-| `OPENROUTER_API_KEY` | `clawd-code`, `clawd-tui` | OpenRouter |
-| `ANTHROPIC_API_KEY` | `clawd-code` | Anthropic |
-| `DFLOW_API_KEY` | `clawd-connectors` | DFlow MCP |
-| `JUPITER_API_KEY` | `clawd-connectors`, `clawd-wallet` | Jupiter |
-| `BIRDEYE_API_KEY` | `clawd-connectors`, `clawd-tui` | Birdeye |
-| `TAILCLAWD_HOST` / `TAILCLAWD_PORT` | `tailclawd` | Dashboard bind (default loopback `:4402`) |
-| `MEMBRAIN_GRPC_ENDPOINT` | agents | Default `localhost:9090` |
-
-Full list: [`.env.example`](./.env.example).
-
-## Verify before deploy
+## Verify
 
 ```bash
 npm run verify          # structure + secrets + keyless tests
 npm run catalog         # print the package map
-npm run tailclawd:start # operator console on :4402
+./claw --help           # v3 operator
+npm run tailclawd:start # http://127.0.0.1:4402
 ```
 
-GitHub Actions at the **repository root** (`.github/workflows/ci.yml`) run the same verify job on `newnew` and `main`. Nested `core-ai/.github` files are templates only — GitHub does not execute them.
-
-## Documentation maintenance
-
-Update this README in the same change whenever you add or rename a package. If the package map changes, update [`MANIFEST.json`](./MANIFEST.json) and [`docs/assets/clawd-core-map.svg`](./docs/assets/clawd-core-map.svg) in the same change.
+When this tree is the GitHub root, [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) runs the same verify job. Update this README in the same change whenever you add or rename a package.

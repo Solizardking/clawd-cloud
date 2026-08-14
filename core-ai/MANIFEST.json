@@ -1,7 +1,22 @@
 {
   "name": "clawd-core-ai",
   "version": "1.0.0",
-  "description": "Enterprise Core AI stack for Clawd Cloud",
+  "description": "Public Clawd Core AI stack — lobster-native Solana agents",
+  "files": [
+    "claw",
+    ".gitignore",
+    ".npmrc",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "CLAWD.md",
+    "CONTRIBUTING.md",
+    "glama.json",
+    "LICENSE",
+    "package.json",
+    "package-lock.json",
+    "README.md",
+    "versions.json"
+  ],
   "required": [
     {
       "path": ".agents",

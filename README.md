@@ -1,24 +1,22 @@
+<div align="center">
+
+<img src="core-ai/docs/assets/clawd-core-header.svg" alt="Clawd Core" width="100%">
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=20&pause=1000&color=14F195&center=true&vCenter=true&width=880&lines=core-ai+is+the+public+product;Clawd+is+the+identity.+Helius+is+the+pipe." alt="Clawd Cloud typing banner">
+
+</div>
+
 # Clawd Cloud
 
-Enterprise GitHub deploy of **Clawd Core AI**.
+Private deploy vehicle. The public product is **Core AI**.
 
-Application code, skills, MCP servers, wallets, and agent runtimes live in [`core-ai/`](./core-ai). That folder is the product. This repository root is the GitHub control plane: license, security policy, Actions, and the catalog check that must stay green before merge.
-
-```text
-clawd-cloud/
-├── .github/          CI, Dependabot, issue/PR templates
-├── core-ai/          Clawd Core stack (mapped in core-ai/README.md)
-├── LICENSE           MIT
-├── SECURITY.md       Private vulnerability reporting
-└── NOTICE.md         Upstream attribution
-```
-
-## Verify
+| Path | What it is |
+|---|---|
+| [`core-ai/`](./core-ai) | Standalone Clawd Core stack — animated README, catalog, CI |
+| [`core-ai/docs/PUBLISH.md`](./core-ai/docs/PUBLISH.md) | Push `core-ai/` to its own public GitHub (`Solizardking/core-ai`) |
 
 ```bash
-git clone https://github.com/Solizardking/clawd-cloud.git
-cd clawd-cloud
 npm run verify
 ```
 
-Read the full package map: [`core-ai/README.md`](./core-ai/README.md).
+That runs inside `core-ai/`: structure map, secret scan, keyless tests.

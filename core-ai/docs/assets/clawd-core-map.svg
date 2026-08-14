@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="mapTitle">
-  <title id="mapTitle">Clawd Core architecture map</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 920" width="1200" height="920" role="img">
+  <title>Clawd Core live map</title>
   <defs>
     <linearGradient id="mapBg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#070b14"/>
@@ -9,177 +9,252 @@
       <stop offset="0%" stop-color="#142033"/>
       <stop offset="100%" stop-color="#10182a"/>
     </linearGradient>
-    <filter id="nodeGlow" x="-30%" y="-30%" width="160%" height="160%">
+    <filter id="nodeGlow" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="4" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <marker id="arrowG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#14F195"/>
     </marker>
-    <marker id="arrowP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9945FF"/>
-    </marker>
-    <marker id="arrowO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff7a4a"/>
-    </marker>
   </defs>
-
-  <rect width="1200" height="640" rx="18" fill="url(#mapBg)"/>
-  <rect x="1" y="1" width="1198" height="638" rx="18" fill="none" stroke="#1e2a44" stroke-width="1.2"/>
-
-  <text x="40" y="42" fill="#14F195" font-family="ui-monospace, Menlo, monospace" font-size="13" letter-spacing="3">LIVE MAP</text>
-  <text x="40" y="74" fill="#f4f7ff" font-family="ui-sans-serif, system-ui, sans-serif" font-size="28" font-weight="700">Clawd Core  how the stack talks</text>
-  <text x="40" y="100" fill="#8ea0bf" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14">Agents on top. Core in the middle. Chain and docs at the edge. Packets never stop.</text>
-
-  <!-- layer labels -->
-  <text x="40" y="140" fill="#9945FF" font-family="ui-monospace, Menlo, monospace" font-size="12">01  AGENTS</text>
-  <text x="40" y="292" fill="#14F195" font-family="ui-monospace, Menlo, monospace" font-size="12">02  CLAWD CORE</text>
-  <text x="40" y="478" fill="#ff7a4a" font-family="ui-monospace, Menlo, monospace" font-size="12">03  CHAIN  ·  DOCS  ·  MEMORY</text>
-
-  <!-- agent nodes -->
-  <g font-family="ui-sans-serif, system-ui, sans-serif">
-    <g transform="translate(40,156)">
-      <rect width="170" height="72" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.4"/>
-      <text x="16" y="30" fill="#ffffff" font-size="15" font-weight="700">clawd-code</text>
-      <text x="16" y="52" fill="#8ea0bf" font-size="12">code · trade · voice</text>
-    </g>
-    <g transform="translate(230,156)">
-      <rect width="170" height="72" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.4"/>
-      <text x="16" y="30" fill="#ffffff" font-size="15" font-weight="700">clawd-grok</text>
-      <text x="16" y="52" fill="#8ea0bf" font-size="12">grok-4.6 · bun REPL</text>
-    </g>
-    <g transform="translate(420,156)">
-      <rect width="170" height="72" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.4"/>
-      <text x="16" y="30" fill="#ffffff" font-size="15" font-weight="700">clawd-agents</text>
-      <text x="16" y="52" fill="#8ea0bf" font-size="12">phoenix · vulcan · twamm</text>
-    </g>
-    <g transform="translate(610,156)">
-      <rect width="170" height="72" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.4"/>
-      <text x="16" y="30" fill="#ffffff" font-size="15" font-weight="700">v3</text>
-      <text x="16" y="52" fill="#8ea0bf" font-size="12">next runtime scaffold</text>
-    </g>
-    <g transform="translate(800,156)">
-      <rect width="170" height="72" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.4"/>
-      <text x="16" y="30" fill="#ffffff" font-size="15" font-weight="700">ai-training</text>
-      <text x="16" y="52" fill="#8ea0bf" font-size="12">LoRA · HF Jobs · W&amp;B</text>
-    </g>
-    <g transform="translate(990,156)">
-      <rect width="170" height="72" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.4"/>
-      <text x="16" y="30" fill="#ffffff" font-size="15" font-weight="700">knowledge</text>
-      <text x="16" y="52" fill="#8ea0bf" font-size="12">facts · gotchas · ADRs</text>
-    </g>
+  <rect width="1200" height="920" rx="18" fill="url(#mapBg)"/>
+  <rect x="1" y="1" width="1198" height="918" rx="18" fill="none" stroke="#1e2a44"/>
+  <text x="40" y="42" fill="#14F195" font-family="ui-monospace, Menlo, monospace" font-size="13" letter-spacing="4">LIVE MAP</text>
+  <text x="40" y="76" fill="#f4f7ff" font-family="ui-sans-serif, system-ui, sans-serif" font-size="28" font-weight="700">How the stack talks</text>
+  <text x="40" y="100" fill="#8ea0bf" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14">Agents on top. Identity in the shell. Chain at the edge. Packets never stop.</text>
+  <rect x="0" y="0" width="1200" height="3" fill="#14F195" opacity="0.25">
+    <animate attributeName="y" values="0;920;0" dur="11s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.35;0" dur="11s" repeatCount="indefinite"/>
+  </rect>
+  <text x="40" y="118" fill="#9945FF" font-family="ui-monospace, Menlo, monospace" font-size="12">01  AGENTS</text>
+  <g transform="translate(36.0,128)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-code</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">code Â· trade Â· voice</text>
   </g>
-
-  <!-- core nodes -->
-  <g font-family="ui-sans-serif, system-ui, sans-serif">
-    <g transform="translate(40,308)">
-      <rect width="210" height="88" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.6"/>
-      <text x="16" y="32" fill="#14F195" font-size="16" font-weight="700">clawd-plugin</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">skills + auto-start MCP</text>
-      <text x="16" y="72" fill="#5e7194" font-size="11">clawd --plugin-dir ./clawd-plugin</text>
-    </g>
-    <g transform="translate(270,308)">
-      <rect width="210" height="88" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.6"/>
-      <text x="16" y="32" fill="#14F195" font-size="16" font-weight="700">clawd-skills</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">canonical SKILL.md source</text>
-      <text x="16" y="72" fill="#5e7194" font-size="11">compile-skills.ts ’ .agents/</text>
-    </g>
-    <g transform="translate(500,308)">
-      <rect width="210" height="88" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="2"/>
-      <text x="16" y="32" fill="#14F195" font-size="16" font-weight="700">clawd-mcp</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">10 public tools · stdio</text>
-      <text x="16" y="72" fill="#5e7194" font-size="11">npx clawd-mcp@latest</text>
-      <rect x="0" y="0" width="210" height="88" rx="12" fill="none" stroke="#14F195" opacity="0.0">
-        <animate attributeName="opacity" values="0.0;0.55;0.0" dur="2.8s" repeatCount="indefinite"/>
+  <g transform="translate(226.0,128)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-agents</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">x402 Â· pump Â· grok</text>
+  </g>
+  <g transform="translate(416.0,128)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-tui</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">operator terminal</text>
+  </g>
+  <g transform="translate(606.0,128)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">claw</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">v3 launcher</text>
+  </g>
+  <g transform="translate(796.0,128)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">v3</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">unified runtime</text>
+  </g>
+  <g transform="translate(986.0,128)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#9945FF" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-grok</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">grok-4.6 Â· bun</text>
+  </g>
+  <text x="40" y="242" fill="#c4a6ff" font-family="ui-monospace, Menlo, monospace" font-size="12">02  IDENTITY</text>
+  <g transform="translate(36.0,252)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="216.0" height="70" rx="12" fill="url(#cardA)" stroke="#c4a6ff" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-core</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">catalog umbrella</text>
+  </g>
+  <g transform="translate(264.0,252)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="216.0" height="70" rx="12" fill="url(#cardA)" stroke="#c4a6ff" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-character</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">persona JSON</text>
+  </g>
+  <g transform="translate(492.0,252)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="216.0" height="70" rx="12" fill="url(#cardA)" stroke="#c4a6ff" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-goals</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">active missions</text>
+  </g>
+  <g transform="translate(720.0,252)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="216.0" height="70" rx="12" fill="url(#cardA)" stroke="#c4a6ff" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">constitution</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">three on-chain laws</text>
+  </g>
+  <g transform="translate(948.0,252)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="216.0" height="70" rx="12" fill="url(#cardA)" stroke="#c4a6ff" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">knowledge</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">facts Â· gotchas</text>
+  </g>
+  <text x="40" y="366" fill="#14F195" font-family="ui-monospace, Menlo, monospace" font-size="12">03  CLAWD CORE</text>
+  <g transform="translate(36.0,376)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-plugin</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">skills + MCP</text>
+  </g>
+  <g transform="translate(226.0,376)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-skills</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">canonical SKILL.md</text>
+  </g>
+  <g transform="translate(416.0,376)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.5"/>
+          <rect x="0" y="0" width="178.0" height="70" rx="12" fill="none" stroke="#14F195" opacity="0">
+        <animate attributeName="opacity" values="0;0.7;0" dur="2.6s" repeatCount="indefinite"/>
       </rect>
-    </g>
-    <g transform="translate(730,308)">
-      <rect width="210" height="88" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.6"/>
-      <text x="16" y="32" fill="#14F195" font-size="16" font-weight="700">clawd-cli</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">signup · DAS · stake · zk</text>
-      <text x="16" y="72" fill="#5e7194" font-size="11">clawd-cli config set-api-key</text>
-    </g>
-    <g transform="translate(960,308)">
-      <rect width="200" height="88" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.6"/>
-      <text x="16" y="32" fill="#14F195" font-size="16" font-weight="700">clawd-cursor</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">rules · skills · MCP</text>
-      <text x="16" y="72" fill="#5e7194" font-size="11">Cursor plugin package</text>
-    </g>
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-mcp</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">10 routed tools</text>
   </g>
-
-  <!-- chain nodes -->
-  <g font-family="ui-sans-serif, system-ui, sans-serif">
-    <g transform="translate(40,494)">
-      <rect width="250" height="96" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.6"/>
-      <text x="16" y="32" fill="#ff7a4a" font-size="16" font-weight="700">Helius RPC / DAS / Sender</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">helius-sdk · HELIUS_API_KEY</text>
-      <text x="16" y="74" fill="#5e7194" font-size="11">~/.helius  ·  Laserstream  ·  Wallet API</text>
-    </g>
-    <g transform="translate(310,494)">
-      <rect width="200" height="96" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.4"/>
-      <text x="16" y="32" fill="#ff7a4a" font-size="15" font-weight="700">mcp-server</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">Pump SDK  ·  stdio/HTTP</text>
-      <text x="16" y="74" fill="#5e7194" font-size="11">builds txs, does not submit</text>
-    </g>
-    <g transform="translate(530,494)">
-      <rect width="200" height="96" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.4"/>
-      <text x="16" y="32" fill="#ff7a4a" font-size="15" font-weight="700">solana-mcp</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">official docs RAG</text>
-      <text x="16" y="74" fill="#5e7194" font-size="11">HTTP :8080 /mcp</text>
-    </g>
-    <g transform="translate(750,494)">
-      <rect width="200" height="96" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.4"/>
-      <text x="16" y="32" fill="#ff7a4a" font-size="15" font-weight="700">ZK Compression</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">Light Protocol MCP</text>
-      <text x="16" y="74" fill="#5e7194" font-size="11">zkcompression.com/mcp</text>
-    </g>
-    <g transform="translate(970,494)">
-      <rect width="190" height="96" rx="12" fill="url(#cardA)" stroke="#c4a6ff" stroke-width="1.6"/>
-      <text x="16" y="32" fill="#c4a6ff" font-size="15" font-weight="700">membrain</text>
-      <text x="16" y="54" fill="#8ea0bf" font-size="12">selective memory</text>
-      <text x="16" y="74" fill="#5e7194" font-size="11">gRPC :9090  ·  SQLite</text>
-    </g>
+  <g transform="translate(606.0,376)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-cli</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">signup Â· DAS Â· zk</text>
   </g>
-
-  <!-- connectors -->
-  <g fill="none" stroke-width="1.6" stroke-dasharray="6 8">
-    <path id="p1" d="M125 228 L145 308" stroke="#9945FF" marker-end="url(#arrowP)"/>
-    <path id="p2" d="M315 228 L375 308" stroke="#9945FF" marker-end="url(#arrowP)"/>
-    <path id="p3" d="M505 228 L605 308" stroke="#14F195" marker-end="url(#arrowG)"/>
-    <path id="p4" d="M695 228 L835 308" stroke="#9945FF" marker-end="url(#arrowP)"/>
-    <path id="p5" d="M145 396 L165 494" stroke="#ff7a4a" marker-end="url(#arrowO)"/>
-    <path id="p6" d="M605 396 L165 494" stroke="#14F195" marker-end="url(#arrowG)"/>
-    <path id="p7" d="M835 396 L165 494" stroke="#14F195" marker-end="url(#arrowG)"/>
-    <path id="p8" d="M605 396 L410 494" stroke="#ff7a4a" marker-end="url(#arrowO)"/>
-    <path id="p9" d="M605 396 L630 494" stroke="#ff7a4a" marker-end="url(#arrowO)"/>
-    <path id="p10" d="M315 228 L1065 494" stroke="#c4a6ff" marker-end="url(#arrowP)"/>
-    <animate attributeName="stroke-dashoffset" from="0" to="-56" dur="1.4s" repeatCount="indefinite"/>
+  <g transform="translate(796.0,376)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">.agents</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">compiled prompts</text>
   </g>
-
-  <!-- packets -->
-  <circle r="4.5" fill="#14F195" filter="url(#nodeGlow)">
-    <animateMotion dur="2.2s" repeatCount="indefinite" rotate="auto">
-      <mpath href="#p3"/>
-    </animateMotion>
-  </circle>
-  <circle r="4.5" fill="#ff7a4a" filter="url(#nodeGlow)">
-    <animateMotion dur="2.8s" repeatCount="indefinite" rotate="auto">
-      <mpath href="#p6"/>
-    </animateMotion>
-  </circle>
-  <circle r="4" fill="#9945FF" filter="url(#nodeGlow)">
-    <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
+  <g transform="translate(986.0,376)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#14F195" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">.clawd-plugin</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">marketplace</text>
+  </g>
+  <text x="40" y="490" fill="#ff7a4a" font-family="ui-monospace, Menlo, monospace" font-size="12">04  CHAIN Â· PAY Â· MEMORY</text>
+  <g transform="translate(36.0,500)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-connectors</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">dflow Â· helius Â· jup</text>
+  </g>
+  <g transform="translate(226.0,500)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-wallet</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">privy Â· deny-first</text>
+  </g>
+  <g transform="translate(416.0,500)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">clawd-router</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">llm Â· x402 gate</text>
+  </g>
+  <g transform="translate(606.0,500)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">zk-primitives</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">nullifier Â· groth16</text>
+  </g>
+  <g transform="translate(796.0,500)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">mcp-server</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">pump Â· no submit</text>
+  </g>
+  <g transform="translate(986.0,500)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="178.0" height="70" rx="12" fill="url(#cardA)" stroke="#ff7a4a" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">membrain</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">gRPC :9090</text>
+  </g>
+  <text x="40" y="614" fill="#8ea0bf" font-family="ui-monospace, Menlo, monospace" font-size="12">05  OPS</text>
+  <g transform="translate(36.0,624)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="273.0" height="70" rx="12" fill="url(#cardA)" stroke="#8ea0bf" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">tailclawd</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">dashboard :4402</text>
+  </g>
+  <g transform="translate(321.0,624)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="273.0" height="70" rx="12" fill="url(#cardA)" stroke="#8ea0bf" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">scripts</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">verify Â· compile</text>
+  </g>
+  <g transform="translate(606.0,624)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="273.0" height="70" rx="12" fill="url(#cardA)" stroke="#8ea0bf" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">.github</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">public CI</text>
+  </g>
+  <g transform="translate(891.0,624)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect width="273.0" height="70" rx="12" fill="url(#cardA)" stroke="#8ea0bf" stroke-width="1.5"/>
+    
+    <text x="14" y="28" fill="#ffffff" font-size="14" font-weight="700">docs</text>
+    <text x="14" y="50" fill="#8ea0bf" font-size="11">maps Â· ADRs</text>
+  </g>
+  <g fill="none" stroke-width="1.4" stroke-dasharray="5 7" stroke="#14F195">
+    <path id="p1" d="M125.0 190.0 L144.0 260.0" stroke="#c4a6ff" marker-end="url(#arrowG)"/>
+    <path id="p2" d="M315.0 190.0 L372.0 260.0" stroke="#c4a6ff" marker-end="url(#arrowG)"/>
+    <path id="p3" d="M505.0 190.0 L600.0 260.0" stroke="#c4a6ff" marker-end="url(#arrowG)"/>
+    <path id="p4" d="M695.0 190.0 L828.0 260.0" stroke="#c4a6ff" marker-end="url(#arrowG)"/>
+    <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="1.3s" repeatCount="indefinite"/>
+    <path id="p5" d="M144.0 314.0 L125.0 384.0" stroke="#14F195" marker-end="url(#arrowG)"/>
+    <path id="p6" d="M372.0 314.0 L315.0 384.0" stroke="#14F195" marker-end="url(#arrowG)"/>
+    <path id="p7" d="M600.0 314.0 L505.0 384.0" stroke="#14F195" marker-end="url(#arrowG)"/>
+    <path id="p8" d="M828.0 314.0 L695.0 384.0" stroke="#14F195" marker-end="url(#arrowG)"/>
+    <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="1.3s" repeatCount="indefinite"/>
+    <path id="p9" d="M125.0 438.0 L125.0 508.0" stroke="#ff7a4a" marker-end="url(#arrowG)"/>
+    <path id="p10" d="M315.0 438.0 L315.0 508.0" stroke="#ff7a4a" marker-end="url(#arrowG)"/>
+    <path id="p11" d="M505.0 438.0 L505.0 508.0" stroke="#ff7a4a" marker-end="url(#arrowG)"/>
+    <path id="p12" d="M695.0 438.0 L695.0 508.0" stroke="#ff7a4a" marker-end="url(#arrowG)"/>
+    <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="1.3s" repeatCount="indefinite"/>
+    <path id="p13" d="M125.0 562.0 L172.5 632.0" stroke="#8ea0bf" marker-end="url(#arrowG)"/>
+    <path id="p14" d="M315.0 562.0 L457.5 632.0" stroke="#8ea0bf" marker-end="url(#arrowG)"/>
+    <path id="p15" d="M505.0 562.0 L742.5 632.0" stroke="#8ea0bf" marker-end="url(#arrowG)"/>
+    <path id="p16" d="M695.0 562.0 L1027.5 632.0" stroke="#8ea0bf" marker-end="url(#arrowG)"/>
+    <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="1.3s" repeatCount="indefinite"/>
+  </g>
+  <circle r="4.2" fill="#c4a6ff" filter="url(#nodeGlow)">
+    <animateMotion dur="2.2s" begin="0.0s" repeatCount="indefinite">
       <mpath href="#p1"/>
     </animateMotion>
   </circle>
-  <circle r="4" fill="#c4a6ff" filter="url(#nodeGlow)">
-    <animateMotion dur="3.4s" repeatCount="indefinite" rotate="auto">
-      <mpath href="#p10"/>
+  <circle r="4.2" fill="#c4a6ff" filter="url(#nodeGlow)">
+    <animateMotion dur="2.5500000000000003s" begin="0.25s" repeatCount="indefinite">
+      <mpath href="#p2"/>
     </animateMotion>
   </circle>
-  <circle r="4" fill="#14F195">
-    <animateMotion dur="2.5s" begin="0.6s" repeatCount="indefinite">
+  <circle r="4.2" fill="#c4a6ff" filter="url(#nodeGlow)">
+    <animateMotion dur="2.9000000000000004s" begin="0.5s" repeatCount="indefinite">
+      <mpath href="#p3"/>
+    </animateMotion>
+  </circle>
+  <circle r="4.2" fill="#c4a6ff" filter="url(#nodeGlow)">
+    <animateMotion dur="3.25s" begin="0.75s" repeatCount="indefinite">
+      <mpath href="#p4"/>
+    </animateMotion>
+  </circle>
+  <circle r="4.2" fill="#14F195" filter="url(#nodeGlow)">
+    <animateMotion dur="2.2s" begin="1.0s" repeatCount="indefinite">
+      <mpath href="#p5"/>
+    </animateMotion>
+  </circle>
+  <circle r="4.2" fill="#14F195" filter="url(#nodeGlow)">
+    <animateMotion dur="2.5500000000000003s" begin="0.0s" repeatCount="indefinite">
+      <mpath href="#p6"/>
+    </animateMotion>
+  </circle>
+  <circle r="4.2" fill="#14F195" filter="url(#nodeGlow)">
+    <animateMotion dur="2.9000000000000004s" begin="0.25s" repeatCount="indefinite">
       <mpath href="#p7"/>
+    </animateMotion>
+  </circle>
+  <circle r="4.2" fill="#14F195" filter="url(#nodeGlow)">
+    <animateMotion dur="3.25s" begin="0.5s" repeatCount="indefinite">
+      <mpath href="#p8"/>
     </animateMotion>
   </circle>
 </svg>
