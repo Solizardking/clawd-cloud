@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [newnew, main]
+  pull_request:
+    branches: [newnew, main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify Core AI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: core-ai
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Structure map
+        run: node scripts/check-structure.mjs
+      - name: Secret scan
+        run: node scripts/secret-scan.mjs
+      - name: Package tests
+        run: npm run test:core
+
+  clawd-mcp:
+    name: Test clawd-mcp
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: core-ai/clawd-mcp
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpm test

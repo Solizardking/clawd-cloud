@@ -1,0 +1,37 @@
+{
+  "name": "@clawd/core",
+  "version": "1.0.0",
+  "description": "Identity umbrella and machine-readable catalog for the Clawd Core AI stack",
+  "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./catalog": "./src/catalog.mjs"
+  },
+  "bin": {
+    "clawd-core": "src/cli.mjs"
+  },
+  "scripts": {
+    "catalog": "node src/cli.mjs catalog",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "keywords": [
+    "clawd",
+    "solana",
+    "core-ai",
+    "catalog"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solizardking/clawd-cloud.git",
+    "directory": "core-ai/clawd-core"
+  }
+}

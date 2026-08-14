@@ -1,0 +1,11 @@
+{
+  "name": "clawd-cloud",
+  "private": true,
+  "description": "GitHub deploy vehicle for Clawd Core AI",
+  "scripts": {
+    "verify": "npm --prefix core-ai run verify"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "clawd-core-ai",
+  "private": true,
+  "description": "Enterprise Clawd Core AI stack — identity, agents, MCP, wallet, router, ZK",
+  "scripts": {
+    "check:structure": "node scripts/check-structure.mjs",
+    "check:secrets": "node scripts/secret-scan.mjs",
+    "test:core": "node --test clawd-core/tests/*.test.mjs tailclawd/tests/*.test.mjs clawd-tui/tests/*.test.mjs clawd-character/tests/*.test.mjs clawd-goals/tests/*.test.mjs constitution/tests/*.test.mjs clawd-connectors/tests/*.test.mjs",
+    "verify": "npm run check:structure && npm run check:secrets && npm run test:core",
+    "compile-skills": "npx tsx scripts/compile-skills.ts",
+    "mcp:pump:build": "npm --prefix mcp-server run build",
+    "mcp:pump:start": "npm --prefix mcp-server run start",
+    "mcp:pump:start:http": "npm --prefix mcp-server run start:http",
+    "mcp:solana:build": "pnpm --dir solana-mcp build",
+    "mcp:solana:dev": "pnpm --dir solana-mcp dev:local",
+    "mcp:solana:start": "pnpm --dir solana-mcp start",
+    "membrain:build": "make -C membrain build",
+    "membrain:test": "make -C membrain test",
+    "membrain:start": "make -C membrain build && membrain/bin/membraned",
+    "tailclawd:start": "node tailclawd/src/server.mjs",
+    "catalog": "node clawd-core/src/cli.mjs catalog"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+coverage/
+*.tsbuildinfo
+
+# Secrets — never commit filled env files
+.env
+.env.*
+!.env.example
+*.pem
+id_rsa
+id_ed25519
+credentials.json
+secrets.json
+auth.json
+*keypair*.json
+.waas_api_token
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Logs and tarballs
+*.log
+*.tgz
+
+# Nested package state
+**/.clawd/
+**/outputs/

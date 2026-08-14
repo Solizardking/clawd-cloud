@@ -1,0 +1,159 @@
+{
+  "name": "clawd-core-ai",
+  "version": "1.0.0",
+  "description": "Enterprise Core AI stack for Clawd Cloud",
+  "required": [
+    {
+      "path": ".agents",
+      "layer": "generated",
+      "summary": "Compiled Clawd-native skills and prompt variants emitted from clawd-skills."
+    },
+    {
+      "path": ".clawd-plugin",
+      "layer": "plugin",
+      "summary": "Marketplace descriptor for the Clawd Core plugin bundle."
+    },
+    {
+      "path": ".github",
+      "layer": "ops",
+      "summary": "Package-level GitHub workflow templates (mirrored at repo root for Actions)."
+    },
+    {
+      "path": "clawd-agents",
+      "layer": "agents",
+      "summary": "Specialized agent runtimes: x402 payments, PumpFun bots, Go agents, Grok harness."
+    },
+    {
+      "path": "clawd-character",
+      "layer": "identity",
+      "summary": "Eliza-compatible character JSON for Clawd and trading personas."
+    },
+    {
+      "path": "clawd-code",
+      "layer": "agents",
+      "summary": "Solana-native AI coding CLI with multi-provider routing and paper-gated perps."
+    },
+    {
+      "path": "clawd-connectors",
+      "layer": "edge",
+      "summary": "MCP connectors for DFlow, Helius, Jupiter, and Birdeye."
+    },
+    {
+      "path": "clawd-core",
+      "layer": "core",
+      "summary": "Identity umbrella and machine-readable catalog of the Core AI stack."
+    },
+    {
+      "path": "clawd-goals",
+      "layer": "identity",
+      "summary": "Active mission files injected into agent system prompts."
+    },
+    {
+      "path": "clawd-mcp",
+      "layer": "core",
+      "summary": "MCP server exposing routed Helius/Solana domain tools."
+    },
+    {
+      "path": "clawd-plugin",
+      "layer": "plugin",
+      "summary": "Clawd Code plugin: skills plus auto-started MCP servers."
+    },
+    {
+      "path": "clawd-router",
+      "layer": "edge",
+      "summary": "OpenAI-compatible LLM router with CLAWD gating and x402 payments."
+    },
+    {
+      "path": "clawd-skills",
+      "layer": "core",
+      "summary": "Canonical SKILL.md source compiled into .agents and MCP prompts."
+    },
+    {
+      "path": "clawd-tui",
+      "layer": "agents",
+      "summary": "Terminal operator surface for gateway chat, slash commands, and Solana lookups."
+    },
+    {
+      "path": "clawd-wallet",
+      "layer": "edge",
+      "summary": "Privy-backed embedded Solana wallet SDK with Jupiter swaps and deny-first agent permissions."
+    },
+    {
+      "path": "constitution",
+      "layer": "identity",
+      "summary": "Clawd Constitution plus hash-attested Three On-Chain Laws."
+    },
+    {
+      "path": "knowledge",
+      "layer": "memory",
+      "summary": "Facts, gotchas, patterns, and architecture notes for agents."
+    },
+    {
+      "path": "mcp-server",
+      "layer": "edge",
+      "summary": "Pump SDK MCP \u2014 quotes, AMM, fees, metadata (builds txs, does not submit)."
+    },
+    {
+      "path": "scripts",
+      "layer": "ops",
+      "summary": "Repo automation: skill compiler, structure check, secret scan."
+    },
+    {
+      "path": "tailclawd",
+      "layer": "ops",
+      "summary": "Operator dashboard for live sessions, metrics, traces, and health."
+    },
+    {
+      "path": "v3",
+      "layer": "agents",
+      "summary": "Next-gen unified Clawd runtime scaffold."
+    },
+    {
+      "path": "zk-primitives",
+      "layer": "edge",
+      "summary": "Light Protocol ZK layer: nullifiers, Groth16 verification, compressed state."
+    }
+  ],
+  "additional": [
+    {
+      "path": "clawd-cli",
+      "layer": "core",
+      "summary": "CLI for Helius account setup, DAS/RPC, staking, and ZK compression."
+    },
+    {
+      "path": "clawd-cursor",
+      "layer": "plugin",
+      "summary": "Cursor skills, rules, and MCP config."
+    },
+    {
+      "path": "clawd-grok",
+      "layer": "agents",
+      "summary": "Bun-native Grok runtime (default grok-4.6)."
+    },
+    {
+      "path": "clawd-perps-agent",
+      "layer": "agents",
+      "summary": "Perps agents: Phoenix, Vulcan, Imperial, TWAMM, Telegram."
+    },
+    {
+      "path": "membrain",
+      "layer": "memory",
+      "summary": "Selective memory daemon \u2014 gRPC :9090, SQLite / pgvector."
+    },
+    {
+      "path": "solana-mcp",
+      "layer": "edge",
+      "summary": "Official Solana docs MCP \u2014 RAG search + canonical retrieval."
+    },
+    {
+      "path": "docs",
+      "layer": "ops",
+      "summary": "Architecture decision records and SVG maps."
+    },
+    {
+      "path": "convex",
+      "layer": "ops",
+      "summary": "Convex backend helpers used by gateway surfaces."
+    }
+  ]
+}
