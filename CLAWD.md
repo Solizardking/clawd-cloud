@@ -1,6 +1,13 @@
-# Core AI — Clawd Instructions
+# Clawd Cloud — Clawd Instructions
 
-This is the canonical Clawd harness for Clawd Core AI.
+This is the canonical Clawd harness for **Clawd Cloud**: the assembled tree of Solana and blockchain-native financial-agent packages. Every MANIFEST destination has a communication target. `./claw` is the operator.
+
+```bash
+./claw --help
+./claw cloud
+./claw status
+./claw route v3 chain "get slot"
+```
 
 Use this repository as Clawd-native tooling:
 

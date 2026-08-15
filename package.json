@@ -1,7 +1,7 @@
 {
   "name": "clawd-core-ai",
   "private": true,
-  "description": "Public Clawd Core AI stack — lobster-native Solana agents. Clawd is the identity. Helius is the pipe.",
+  "description": "Clawd Cloud — the complete harness for Solana and blockchain-native financial agents. Clawd is the identity. Helius is the pipe.",
   "homepage": "https://github.com/Solizardking/core-ai",
   "repository": {
     "type": "git",

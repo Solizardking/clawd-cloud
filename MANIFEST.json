@@ -1,7 +1,7 @@
 {
   "name": "clawd-core-ai",
   "version": "1.0.0",
-  "description": "Public Clawd Core AI stack — lobster-native Solana agents",
+  "description": "Clawd Cloud — complete harness for Solana and blockchain-native financial agents",
   "files": [
     "claw",
     ".gitignore",

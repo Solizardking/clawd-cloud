@@ -1,11 +1,23 @@
-# Core AI — Clawd Agent Instructions
+# Clawd Cloud — Clawd Agent Instructions
 
 > This file is the Layer A harness for Clawd Code and other Clawd-compatible agents.
 > Skills in `.agents/skills/` provide the domain expertise (Layer B).
+>
+> This tree is the complete **Clawd Cloud** harness for Solana and blockchain-native financial agents.
 
 ## Repository Overview
 
-This monorepo contains Clawd Core — Solana agent tooling that talks to Helius RPC/DAS/Sender:
+This monorepo is Clawd Cloud — Solana agent tooling that talks to Helius RPC/DAS/Sender. Every MANIFEST package is a registered destination. Route through `./claw`:
+
+```bash
+./claw cloud                          # destinations + capabilities + routes
+./claw route v3 chain "get slot"      # chain/mcp → clawd-mcp
+./claw route operator wallet "quote"  # wallet/pay → clawd-wallet
+./claw route clawd-code perps "paper" # perps/trade → clawd-perps-agent (+ v3 trade)
+./claw route v3 memory "recall"       # memory → membrain
+```
+
+Named capabilities (`chain`/`mcp`, `wallet`/`pay`, `perps`/`trade`, `memory`) are addressable without live RPC, signing, or a funded wallet. The shipped router returns `delivered`, `unreachable`, or `unsupported`.
 
 | Package | What it does |
 |---|---|

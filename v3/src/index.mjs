@@ -22,6 +22,9 @@ import os from 'os';
 import { spawn } from 'child_process';
 import { resolveProvider } from './providers/index.mjs';
 import { LocalGallery } from './storage/gallery.mjs';
+import { createDefaultAdapters } from '../../clawd-core/src/adapters.mjs';
+import { formatCloudStatus, loadCloudRegistry } from '../../clawd-core/src/registry.mjs';
+import { routeMessage } from '../../clawd-core/src/router.mjs';
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
@@ -134,17 +137,30 @@ async function runDelegatedRuntime(kind, args) {
 function printBanner() {
     console.log(`
 \x1b[36m╔═══════════════════════════════════════════════════════════════╗
-║  🦞 OPEN CLAWD v3                                             ║
-║  Grok-first AI coding, trading, research, image & voice CLI   ║
+║  🦞 CLAWD CLOUD                                               ║
+║  Blockchain-native financial-agent harness                    ║
 ║  xAI · Anthropic · DeepSeek · OpenRouter · Solana · Phoenix   ║
 ╚═══════════════════════════════════════════════════════════════╝\x1b[0m`);
 }
 
 function printUsage() {
     printBanner();
+    const registry = loadCloudRegistry();
+    const destNames = registry.destinations.map((d) => d.path).join(', ');
+    const capNames = registry.capabilities
+        .map((c) => (c.aliases?.length ? `${c.name}/${c.aliases.join('/')}` : c.name))
+        .join(', ');
     console.log(`
 USAGE:
   clawd [mode] [args] [options]
+
+CLAWD CLOUD:
+  This tree is the complete Clawd Cloud harness for Solana financial agents.
+  cloud      List registered destinations and routes
+  status     Same as cloud
+  route      Route a message: ./claw route <from> <to> <message>
+  Destinations: ${destNames}
+  Capabilities / routes: ${capNames}
 
 MODES:
   code       Write, review, and ship production code
@@ -176,6 +192,9 @@ EXAMPLES:
   clawd legacy code "Build a Jupiter swap bot"
   clawd grok --prompt "show me SOL perps orderbook depth"
   clawd mcp --http
+  clawd cloud
+  clawd status
+  clawd route v3 chain "get slot"
 
 OPTIONS:
   --provider <name>   xai | anthropic | openrouter | deepseek
@@ -270,6 +289,29 @@ async function main() {
 
     if (args[0] === '/verify' || args[0] === 'verify') {
         process.exit(runVerify() ? 0 : 1);
+    }
+
+    if (args[0] === 'cloud' || args[0] === '/cloud' || args[0] === 'status' || args[0] === '/status') {
+        printBanner();
+        process.stdout.write(formatCloudStatus());
+        process.exit(0);
+    }
+
+    if (args[0] === 'route' || args[0] === '/route') {
+        const live = args.includes('--live');
+        const rest = args.slice(1).filter((a) => a !== '--live');
+        const [from, to, ...msgParts] = rest;
+        const message = msgParts.join(' ');
+        if (!from || !to || !message) {
+            console.error('usage: ./claw route [--live] <from> <to> <message>');
+            process.exit(1);
+        }
+        const result = await routeMessage(
+            { sender: from, destination: to, message },
+            { adapters: createDefaultAdapters({ root: repoRoot(), live }) },
+        );
+        console.log(JSON.stringify(result, null, 2));
+        process.exit(0);
     }
 
     if (args[0] === '/gallery' || args[0] === 'gallery') {

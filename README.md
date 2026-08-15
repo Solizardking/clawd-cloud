@@ -21,11 +21,13 @@ Public  github.com/Solizardking/core-ai
 
 </div>
 
-# Clawd Core AI
+# Clawd Cloud
 
-Public lobster-native Solana agent stack. **Clawd is the identity. Helius is the pipe.**
+The complete harness for Solana and blockchain-native financial agents. **Clawd is the identity. Helius is the pipe.**
 
-This repository is Core AI as its own GitHub product — not a nested folder. Clone it, run `./claw`, compile skills, talk to the chain.
+Every package in this tree is a registered destination with a communication target. Agents, identity, MCP/chain, wallet/pay, perps, and memory talk through one router — `./claw cloud` lists the map; `./claw route` delivers a message.
+
+This repository is Clawd Cloud as its own GitHub product — not a nested folder. Clone it, run `./claw`, compile skills, talk to the chain.
 
 <img src="docs/assets/clawd-boot.svg" alt="Animated Core AI boot terminal" width="100%">
 
@@ -77,6 +79,28 @@ flowchart TB
   TAIL --> CORE
 ```
 
+## Clawd Cloud fabric
+
+`MANIFEST.json` plus `clawd-core` own the machine-readable map (path, layer, invoke recipe and/or endpoint). The shipped router takes a sender, a destination or named capability, and a message, and returns `delivered`, `unreachable`, or `unsupported`. Live RPC, signing, and funded wallets are not required for a capability to be addressable.
+
+| Capability | Destinations |
+|---|---|
+| `chain` / `mcp` | `clawd-mcp`, `clawd-connectors`, `solana-mcp`, `mcp-server` |
+| `wallet` / `pay` | `clawd-wallet`, `clawd-router` |
+| `perps` / `trade` | `clawd-perps-agent`, `v3` (paper-gated trade surface) |
+| `memory` | `membrain` |
+
+```bash
+./claw --help
+./claw cloud
+./claw status
+./claw route v3 chain "get slot"
+./claw route operator memory "recall last trade"
+npm run catalog
+```
+
+`legacy`, `grok`, and `mcp` still delegate to the original runtimes.
+
 ## Quick start
 
 ```bash
@@ -85,6 +109,7 @@ cd core-ai
 chmod +x claw
 npm run verify
 ./claw --help
+./claw cloud
 ```
 
 Agent loop:
@@ -191,8 +216,10 @@ Canonical list. Enforced by [`MANIFEST.json`](./MANIFEST.json) and `npm run veri
 
 ```bash
 npm run verify          # structure + secrets + keyless tests
-npm run catalog         # print the package map
-./claw --help           # v3 operator
+npm run catalog         # print the assembled Clawd Cloud map
+./claw --help           # operator — names Clawd Cloud and destinations
+./claw cloud            # registered destinations, capabilities, routes
+./claw route v3 chain "get slot"
 npm run tailclawd:start # http://127.0.0.1:4402
 ```
 

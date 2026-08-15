@@ -6,7 +6,11 @@
   "main": "src/index.mjs",
   "exports": {
     ".": "./src/index.mjs",
-    "./catalog": "./src/catalog.mjs"
+    "./catalog": "./src/catalog.mjs",
+    "./registry": "./src/registry.mjs",
+    "./router": "./src/router.mjs",
+    "./cloud-map": "./src/cloud-map.mjs",
+    "./adapters": "./src/adapters.mjs"
   },
   "bin": {
     "clawd-core": "src/cli.mjs"
