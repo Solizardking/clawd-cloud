@@ -2,17 +2,14 @@ name: Sync Check
 
 on:
   push:
-    branches: [newnew, main]
+    branches: [main]
   pull_request:
-    branches: [newnew, main]
+    branches: [main]
 
 jobs:
   check-references-sync:
     name: Verify reference files are in sync
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: core-ai
 
     steps:
       - uses: actions/checkout@v4

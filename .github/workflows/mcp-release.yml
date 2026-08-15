@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: core-ai/clawd-mcp
+        working-directory: ./clawd-mcp
 
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
         with:
-          ref: newnew
+          ref: main
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
