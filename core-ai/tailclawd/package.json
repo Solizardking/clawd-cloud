@@ -1,0 +1,23 @@
+{
+  "name": "@clawd/tailclawd",
+  "version": "1.0.0",
+  "description": "Operator dashboard for Clawd Core — sessions, metrics, traces, and health",
+  "type": "module",
+  "main": "src/server.mjs",
+  "bin": {
+    "tailclawd": "src/server.mjs"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solizardking/clawd-cloud.git",
+    "directory": "core-ai/tailclawd"
+  }
+}

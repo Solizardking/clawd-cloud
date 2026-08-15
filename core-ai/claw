@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Claw — Core AI operator entry. Forwards to the v3 runtime.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+exec node "$ROOT/v3/src/index.mjs" "$@"

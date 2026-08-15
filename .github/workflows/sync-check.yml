@@ -1,0 +1,595 @@
+name: Sync Check
+
+on:
+  push:
+    branches: [newnew, main]
+  pull_request:
+    branches: [newnew, main]
+
+jobs:
+  check-references-sync:
+    name: Verify reference files are in sync
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: core-ai
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compare reference files
+        run: |
+          SKILLS_DIR="clawd-skills/clawd/references"
+          PLUGIN_DIR="clawd-plugin/skills/clawd/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$PLUGIN_DIR" ]; then
+            echo "One or both reference directories are missing."
+            echo "  clawd-skills: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-plugin: $([ -d "$PLUGIN_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          # Check for files only in one directory
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          PLUGIN_FILES=$(cd "$PLUGIN_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$PLUGIN_FILES" ]; then
+            echo "File lists differ between reference directories:"
+            echo ""
+            echo "Only in clawd-skills/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            echo ""
+            echo "Only in clawd-plugin/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          # Compare file contents
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills and clawd-plugin"
+              diff --unified=3 "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo ""
+            echo "Reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd/references/."
+            echo "Copy changes to clawd-plugin/skills/clawd/references/ to fix."
+            exit 1
+          fi
+
+          echo "All reference files are in sync."
+
+      - name: Compare DFlow reference files
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-dflow/references"
+          PLUGIN_DIR="clawd-plugin/skills/dflow/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$PLUGIN_DIR" ]; then
+            echo "One or both DFlow reference directories are missing."
+            echo "  clawd-skills/clawd-dflow: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-plugin/skills/dflow: $([ -d "$PLUGIN_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          # Check for files only in one directory
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          PLUGIN_FILES=$(cd "$PLUGIN_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$PLUGIN_FILES" ]; then
+            echo "File lists differ between DFlow reference directories:"
+            echo ""
+            echo "Only in clawd-skills/clawd-dflow/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            echo ""
+            echo "Only in clawd-plugin/skills/dflow/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          # Compare file contents
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-dflow and clawd-plugin/skills/dflow"
+              diff --unified=3 "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo ""
+            echo "DFlow reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-dflow/references/."
+            echo "Copy changes to clawd-plugin/skills/dflow/references/ to fix."
+            exit 1
+          fi
+
+          echo "All DFlow reference files are in sync."
+
+      - name: Compare Jupiter reference files
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-jupiter/references"
+          PLUGIN_DIR="clawd-plugin/skills/jupiter/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$PLUGIN_DIR" ]; then
+            echo "One or both Jupiter reference directories are missing."
+            echo "  clawd-skills/clawd-jupiter: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-plugin/skills/jupiter: $([ -d "$PLUGIN_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          # Check for files only in one directory
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          PLUGIN_FILES=$(cd "$PLUGIN_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$PLUGIN_FILES" ]; then
+            echo "File lists differ between Jupiter reference directories:"
+            echo ""
+            echo "Only in clawd-skills/clawd-jupiter/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            echo ""
+            echo "Only in clawd-plugin/skills/jupiter/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          # Compare file contents
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-jupiter and clawd-plugin/skills/jupiter"
+              diff --unified=3 "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo ""
+            echo "Jupiter reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-jupiter/references/."
+            echo "Copy changes to clawd-plugin/skills/jupiter/references/ to fix."
+            exit 1
+          fi
+
+          echo "All Jupiter reference files are in sync."
+
+      - name: Compare OKX reference files
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-okx/references"
+          PLUGIN_DIR="clawd-plugin/skills/okx/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$PLUGIN_DIR" ]; then
+            echo "One or both OKX reference directories are missing."
+            echo "  clawd-skills/clawd-okx: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-plugin/skills/okx: $([ -d "$PLUGIN_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          # Check for files only in one directory
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          PLUGIN_FILES=$(cd "$PLUGIN_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$PLUGIN_FILES" ]; then
+            echo "File lists differ between OKX reference directories:"
+            echo ""
+            echo "Only in clawd-skills/clawd-okx/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            echo ""
+            echo "Only in clawd-plugin/skills/okx/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          # Compare file contents
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-okx and clawd-plugin/skills/okx"
+              diff --unified=3 "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo ""
+            echo "OKX reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-okx/references/."
+            echo "Copy changes to clawd-plugin/skills/okx/references/ to fix."
+            exit 1
+          fi
+
+          echo "All OKX reference files are in sync."
+
+      - name: Compare Phantom reference files
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-phantom/references"
+          PLUGIN_DIR="clawd-plugin/skills/phantom/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$PLUGIN_DIR" ]; then
+            echo "One or both Phantom reference directories are missing."
+            echo "  clawd-skills/clawd-phantom: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-plugin/skills/phantom: $([ -d "$PLUGIN_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          # Check for files only in one directory
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          PLUGIN_FILES=$(cd "$PLUGIN_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$PLUGIN_FILES" ]; then
+            echo "File lists differ between Phantom reference directories:"
+            echo ""
+            echo "Only in clawd-skills/clawd-phantom/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            echo ""
+            echo "Only in clawd-plugin/skills/phantom/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          # Compare file contents
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-phantom and clawd-plugin/skills/phantom"
+              diff --unified=3 "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo ""
+            echo "Phantom reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-phantom/references/."
+            echo "Copy changes to clawd-plugin/skills/phantom/references/ to fix."
+            exit 1
+          fi
+
+          echo "All Phantom reference files are in sync."
+
+      - name: Compare SVM reference files
+        run: |
+          SKILLS_DIR="clawd-skills/svm/references"
+          PLUGIN_DIR="clawd-plugin/skills/svm/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$PLUGIN_DIR" ]; then
+            echo "One or both SVM reference directories are missing."
+            echo "  clawd-skills/svm: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-plugin/skills/svm: $([ -d "$PLUGIN_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          # Check for files only in one directory
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          PLUGIN_FILES=$(cd "$PLUGIN_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$PLUGIN_FILES" ]; then
+            echo "File lists differ between SVM reference directories:"
+            echo ""
+            echo "Only in clawd-skills/svm/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            echo ""
+            echo "Only in clawd-plugin/skills/svm/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$PLUGIN_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          # Compare file contents
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/svm and clawd-plugin/skills/svm"
+              diff --unified=3 "$SKILLS_DIR/$file" "$PLUGIN_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo ""
+            echo "SVM reference files are out of sync!"
+            echo "The canonical source is clawd-skills/svm/references/."
+            echo "Copy changes to clawd-plugin/skills/svm/references/ to fix."
+            exit 1
+          fi
+
+          echo "All SVM reference files are in sync."
+
+      - name: Compare build reference files (clawd-cursor)
+        run: |
+          SKILLS_DIR="clawd-skills/clawd/references"
+          CURSOR_DIR="clawd-cursor/skills/clawd/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$CURSOR_DIR" ]; then
+            echo "One or both reference directories are missing."
+            echo "  clawd-skills: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-cursor: $([ -d "$CURSOR_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          CURSOR_FILES=$(cd "$CURSOR_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$CURSOR_FILES" ]; then
+            echo "File lists differ between build reference directories:"
+            echo "Only in clawd-skills/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            echo "Only in clawd-cursor/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills and clawd-cursor"
+              diff --unified=3 "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo "Build reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd/references/."
+            echo "Copy changes to clawd-cursor/skills/clawd/references/ to fix."
+            exit 1
+          fi
+
+          echo "All build reference files (clawd-cursor) are in sync."
+
+      - name: Compare DFlow reference files (clawd-cursor)
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-dflow/references"
+          CURSOR_DIR="clawd-cursor/skills/dflow/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$CURSOR_DIR" ]; then
+            echo "One or both DFlow reference directories are missing."
+            echo "  clawd-skills/clawd-dflow: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-cursor/skills/dflow: $([ -d "$CURSOR_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          CURSOR_FILES=$(cd "$CURSOR_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$CURSOR_FILES" ]; then
+            echo "File lists differ between DFlow reference directories:"
+            echo "Only in clawd-skills/clawd-dflow/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            echo "Only in clawd-cursor/skills/dflow/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-dflow and clawd-cursor/skills/dflow"
+              diff --unified=3 "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo "DFlow reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-dflow/references/."
+            echo "Copy changes to clawd-cursor/skills/dflow/references/ to fix."
+            exit 1
+          fi
+
+          echo "All DFlow reference files (clawd-cursor) are in sync."
+
+      - name: Compare Jupiter reference files (clawd-cursor)
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-jupiter/references"
+          CURSOR_DIR="clawd-cursor/skills/jupiter/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$CURSOR_DIR" ]; then
+            echo "One or both Jupiter reference directories are missing."
+            echo "  clawd-skills/clawd-jupiter: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-cursor/skills/jupiter: $([ -d "$CURSOR_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          CURSOR_FILES=$(cd "$CURSOR_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$CURSOR_FILES" ]; then
+            echo "File lists differ between Jupiter reference directories:"
+            echo "Only in clawd-skills/clawd-jupiter/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            echo "Only in clawd-cursor/skills/jupiter/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-jupiter and clawd-cursor/skills/jupiter"
+              diff --unified=3 "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo "Jupiter reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-jupiter/references/."
+            echo "Copy changes to clawd-cursor/skills/jupiter/references/ to fix."
+            exit 1
+          fi
+
+          echo "All Jupiter reference files (clawd-cursor) are in sync."
+
+      - name: Compare OKX reference files (clawd-cursor)
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-okx/references"
+          CURSOR_DIR="clawd-cursor/skills/okx/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$CURSOR_DIR" ]; then
+            echo "One or both OKX reference directories are missing."
+            echo "  clawd-skills/clawd-okx: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-cursor/skills/okx: $([ -d "$CURSOR_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          CURSOR_FILES=$(cd "$CURSOR_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$CURSOR_FILES" ]; then
+            echo "File lists differ between OKX reference directories:"
+            echo "Only in clawd-skills/clawd-okx/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            echo "Only in clawd-cursor/skills/okx/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-okx and clawd-cursor/skills/okx"
+              diff --unified=3 "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo "OKX reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-okx/references/."
+            echo "Copy changes to clawd-cursor/skills/okx/references/ to fix."
+            exit 1
+          fi
+
+          echo "All OKX reference files (clawd-cursor) are in sync."
+
+      - name: Compare Phantom reference files (clawd-cursor)
+        run: |
+          SKILLS_DIR="clawd-skills/clawd-phantom/references"
+          CURSOR_DIR="clawd-cursor/skills/phantom/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$CURSOR_DIR" ]; then
+            echo "One or both Phantom reference directories are missing."
+            echo "  clawd-skills/clawd-phantom: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-cursor/skills/phantom: $([ -d "$CURSOR_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          CURSOR_FILES=$(cd "$CURSOR_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$CURSOR_FILES" ]; then
+            echo "File lists differ between Phantom reference directories:"
+            echo "Only in clawd-skills/clawd-phantom/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            echo "Only in clawd-cursor/skills/phantom/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/clawd-phantom and clawd-cursor/skills/phantom"
+              diff --unified=3 "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo "Phantom reference files are out of sync!"
+            echo "The canonical source is clawd-skills/clawd-phantom/references/."
+            echo "Copy changes to clawd-cursor/skills/phantom/references/ to fix."
+            exit 1
+          fi
+
+          echo "All Phantom reference files (clawd-cursor) are in sync."
+
+      - name: Compare SVM reference files (clawd-cursor)
+        run: |
+          SKILLS_DIR="clawd-skills/svm/references"
+          CURSOR_DIR="clawd-cursor/skills/svm/references"
+
+          if [ ! -d "$SKILLS_DIR" ] || [ ! -d "$CURSOR_DIR" ]; then
+            echo "One or both SVM reference directories are missing."
+            echo "  clawd-skills/svm: $([ -d "$SKILLS_DIR" ] && echo 'exists' || echo 'MISSING')"
+            echo "  clawd-cursor/skills/svm: $([ -d "$CURSOR_DIR" ] && echo 'exists' || echo 'MISSING')"
+            exit 1
+          fi
+
+          SKILLS_FILES=$(cd "$SKILLS_DIR" && find . -type f -name '*.md' | sort)
+          CURSOR_FILES=$(cd "$CURSOR_DIR" && find . -type f -name '*.md' | sort)
+
+          if [ "$SKILLS_FILES" != "$CURSOR_FILES" ]; then
+            echo "File lists differ between SVM reference directories:"
+            echo "Only in clawd-skills/svm/:"
+            comm -23 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            echo "Only in clawd-cursor/skills/svm/:"
+            comm -13 <(echo "$SKILLS_FILES") <(echo "$CURSOR_FILES") | sed 's/^/  /'
+            exit 1
+          fi
+
+          DIFF_FOUND=0
+          for file in $SKILLS_FILES; do
+            if ! diff -q "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" > /dev/null 2>&1; then
+              echo "DIFF: $file differs between clawd-skills/svm and clawd-cursor/skills/svm"
+              diff --unified=3 "$SKILLS_DIR/$file" "$CURSOR_DIR/$file" | head -20
+              echo "..."
+              DIFF_FOUND=1
+            fi
+          done
+
+          if [ "$DIFF_FOUND" -eq 1 ]; then
+            echo "SVM reference files are out of sync!"
+            echo "The canonical source is clawd-skills/svm/references/."
+            echo "Copy changes to clawd-cursor/skills/svm/references/ to fix."
+            exit 1
+          fi
+
+          echo "All SVM reference files (clawd-cursor) are in sync."
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify generated skills and prompts are fresh
+        run: |
+          npx tsx scripts/compile-skills.ts
+
+          if ! git diff --quiet .agents/ clawd-mcp/system-prompts/; then
+            echo ""
+            echo "Generated skill output is stale!"
+            echo ""
+            git diff --stat .agents/ clawd-mcp/system-prompts/
+            echo ""
+            echo "Run 'npx tsx scripts/compile-skills.ts' and commit the output."
+            exit 1
+          fi
+
+          STALE=$(git status --porcelain .agents/ clawd-mcp/system-prompts/)
+          if [ -n "$STALE" ]; then
+            echo ""
+            echo "Stale or untracked files detected in generated output:"
+            echo "$STALE"
+            echo ""
+            echo "Run 'npx tsx scripts/compile-skills.ts', review the changes, and commit."
+            exit 1
+          fi
+
+          echo "All generated skill output is up to date."

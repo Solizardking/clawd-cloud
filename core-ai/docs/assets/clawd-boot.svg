@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" width="1200" height="240" role="img">
+  <defs>
+    <linearGradient id="termBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#070b14"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="240" rx="16" fill="url(#termBg)"/>
+  <rect x="1" y="1" width="1198" height="238" rx="16" fill="none" stroke="#1e2a44"/>
+  <circle cx="28" cy="22" r="6" fill="#ff5f56"/>
+  <circle cx="50" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="72" cy="22" r="6" fill="#27c93f"/>
+  <text x="100" y="27" fill="#5e7194" font-family="ui-monospace, Menlo, monospace" font-size="12">claw@core-ai — zsh</text>
+  <line x1="0" y1="38" x2="1200" y2="38" stroke="#1e2a44"/>
+  <text x="28" y="48" fill="#14F195" font-family="ui-monospace, Menlo, monospace" font-size="15" opacity="0">
+    $ ./claw --plugin-dir ./clawd-plugin
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.02;1" begin="0s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="28" y="76" fill="#c4a6ff" font-family="ui-monospace, Menlo, monospace" font-size="15" opacity="0">
+    spawning leviathan · constitution hash ok
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.02;1" begin="0.4s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="28" y="104" fill="#9945FF" font-family="ui-monospace, Menlo, monospace" font-size="15" opacity="0">
+    mcp  clawd-mcp · connectors · pump · zk
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.02;1" begin="0.9s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="28" y="132" fill="#ff7a4a" font-family="ui-monospace, Menlo, monospace" font-size="15" opacity="0">
+    wallet deny-first · paper gates armed
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.02;1" begin="1.4s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="28" y="160" fill="#9aa7c2" font-family="ui-monospace, Menlo, monospace" font-size="15" opacity="0">
+    tailclawd :4402 · membrain :9090
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.02;1" begin="1.9s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="28" y="188" fill="#14F195" font-family="ui-monospace, Menlo, monospace" font-size="15" opacity="0">
+    CLAWD CORE online. Helius is the pipe.
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.02;1" begin="2.4s" dur="0.4s" fill="freeze"/>
+  </text>
+  <rect x="28" y="176" width="9" height="16" fill="#14F195">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" begin="2.8s" repeatCount="indefinite"/>
+  </rect>
+</svg>

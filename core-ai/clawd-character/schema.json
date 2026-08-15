@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Solizardking/clawd-cloud/core-ai/clawd-character/schema.json",
+  "title": "ClawdCharacter",
+  "type": "object",
+  "required": ["name"],
+  "additionalProperties": true,
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "bio": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "lore": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "adjectives": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "topics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "x402Support": { "type": "boolean" }
+  }
+}
