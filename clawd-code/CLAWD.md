@@ -18,7 +18,7 @@ This monorepo contains the Clawd Code ecosystem — Solana-native AI coding agen
 The Clawd Code plugin auto-starts multiple MCP servers for live blockchain access:
 
 ```bash
-clawd --plugin-dir ./clawd-plugin
+./clawd --plugin-dir ./clawd-plugin
 ```
 
 Configured servers:
