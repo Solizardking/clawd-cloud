@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Clawd — same operator as ./claw. Exists so `./clawd --plugin-dir ./clawd-plugin`
+# works from a fresh checkout without a global `clawd` on PATH.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+exec node "$ROOT/v3/src/index.mjs" "$@"
