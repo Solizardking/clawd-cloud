@@ -132,6 +132,10 @@ export const COMMUNICATION_TARGETS = {
     kind: 'read',
     invoke: 'read convex/',
   },
+  outputs: {
+    kind: 'read',
+    invoke: 'read outputs/',
+  },
 };
 
 /**

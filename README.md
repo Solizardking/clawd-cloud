@@ -258,6 +258,7 @@ Canonical list. Enforced by [`MANIFEST.json`](MANIFEST.json) and `npm run verify
 | [`solana-mcp`](solana-mcp) | edge | Solana docs MCP — RAG + canonical retrieval | `npm run mcp:solana:dev` → `http://localhost:8080/mcp` |
 | [`docs`](docs) | ops | ADRs and animated SVG maps | [architecture](docs/architecture.md) |
 | [`convex`](convex) | ops | Convex helpers used by gateway surfaces | package-local |
+| [`outputs`](outputs) | ops | Local gallery / generated artifacts | runtime — contents gitignored |
 
 ### Root files
 
@@ -265,10 +266,13 @@ Canonical list. Enforced by [`MANIFEST.json`](MANIFEST.json) and `npm run verify
 |---|---|
 | [`claw`](claw) | Public operator launcher → `v3` runtime |
 | [`clawd`](clawd) | Same operator — so `./clawd --plugin-dir ./clawd-plugin` works without a global install |
+| [`.editorconfig`](.editorconfig) | Editor defaults (LF, 2-space indent) |
 | [`.env.example`](.env.example) | Operator env template — copy to `.env.local` |
+| [`.gitattributes`](.gitattributes) | LF normalization |
 | [`.mcp.json`](.mcp.json) | Root MCP registry (DFlow, Helius, Jupiter, Birdeye, clawd-mcp) |
 | [`.gitignore`](.gitignore) | Secrets, `node_modules`, build output |
-| [`.npmrc`](.npmrc) | npm publish policy (`minimum-release-age`) |
+| [`.npmrc`](.npmrc) | npm project config |
+| [`.nvmrc`](.nvmrc) | Node 20 |
 | [`AGENTS.md`](AGENTS.md) | Layer A harness for Clawd-compatible agents |
 | [`CLAUDE.md`](CLAUDE.md) | Compatibility shim for runtimes that auto-load it |
 | [`CLAWD.md`](CLAWD.md) | Canonical Clawd operator instructions |
@@ -311,6 +315,27 @@ npm run tailclawd:start # http://127.0.0.1:4402
 Docs: [architecture](docs/architecture.md) · [ADR](docs/adr/ADR-001-open-clawd-v2.md) · [publish](docs/PUBLISH.md)
 
 When you add or rename a package, update this README in the same change. `scripts/check-structure.mjs` enforces the map.
+
+---
+
+## npm packages
+
+Install from this checkout, or from npm when published. Root `clawd-cloud` stays **private** — it is the GitHub monorepo, not an npm tarball.
+
+| Package | npm | Command |
+| --- | --- | --- |
+| Clawd MCP | [`clawd-mcp`](https://www.npmjs.com/package/clawd-mcp) | `npx clawd-mcp@latest` |
+| Clawd CLI | [`clawd-cli`](https://www.npmjs.com/package/clawd-cli) | `npx clawd-cli@latest` |
+| Connectors | [`@openclawd/clawd-connectors`](https://www.npmjs.com/package/@openclawd/clawd-connectors) | `npm i @openclawd/clawd-connectors` |
+| Catalog | [`@clawd/core`](https://www.npmjs.com/package/@clawd/core) | `npx clawd-core catalog` |
+| Clawd Code | [`@solana-clawd/clawd-code`](https://www.npmjs.com/package/@solana-clawd/clawd-code) | `npx @solana-clawd/clawd-code` |
+| Wallet | [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) | `npm i @openclawd/wallet` |
+| Tailclawd | [`@clawd/tailclawd`](https://www.npmjs.com/package/@clawd/tailclawd) | `npx tailclawd` |
+| TUI | [`@clawd/tui`](https://www.npmjs.com/package/@clawd/tui) | `npx clawd-tui` |
+
+In-tree only (not published as their npm names from this repo): `mcp-server` (`@pump-fun/mcp-server`), `solana-mcp`, `membrain` clients, `clawd-grok`, `v3`. Use the GitHub paths.
+
+Publish a tagged MCP release with `git tag clawd-mcp@x.y.z && git push origin clawd-mcp@x.y.z` — see [`.github/workflows/mcp-publish.yml`](.github/workflows/mcp-publish.yml).
 
 ---
 

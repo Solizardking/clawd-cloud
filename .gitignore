@@ -100,5 +100,9 @@ membrain/clients/python/**/*.egg-info/
 pnpm-lock.yaml
 !solana-mcp/pnpm-lock.yaml
 
+# Runtime gallery (keep the folder, ignore generated files)
+outputs/gallery/*
+!outputs/gallery/.gitkeep
+
 # Project docs - keep in git now (was: docs/)
 TG.md

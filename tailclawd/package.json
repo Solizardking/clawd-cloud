@@ -15,9 +15,12 @@
   "engines": {
     "node": ">=20"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Solizardking/clawd-cloud.git",
-    "directory": "core-ai/tailclawd"
+    "directory": "tailclawd"
   }
 }

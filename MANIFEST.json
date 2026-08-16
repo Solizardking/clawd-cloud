@@ -6,9 +6,12 @@
     "claw",
     "clawd",
     ".env.example",
+    ".editorconfig",
+    ".gitattributes",
     ".gitignore",
     ".mcp.json",
     ".npmrc",
+    ".nvmrc",
     "AGENTS.md",
     "CLAUDE.md",
     "CLAWD.md",
@@ -181,6 +184,11 @@
       "path": "convex",
       "layer": "ops",
       "summary": "Convex backend helpers used by gateway surfaces."
+    },
+    {
+      "path": "outputs",
+      "layer": "ops",
+      "summary": "Local runtime gallery and generated artifacts (gitignored contents)."
     }
   ]
 }

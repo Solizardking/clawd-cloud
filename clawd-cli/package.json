@@ -2,14 +2,17 @@
   "name": "clawd-cli",
   "version": "2.0.0",
   "description": "Clawd CLI — manage Helius accounts, query Solana, and automate agent workflows",
-  "homepage": "https://github.com/Solizardking/core-ai/tree/main/clawd-cli",
+  "homepage": "https://github.com/Solizardking/clawd-cloud/tree/main/clawd-cli#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Solizardking/core-ai.git",
+    "url": "https://github.com/Solizardking/clawd-cloud.git",
     "directory": "clawd-cli"
   },
   "bugs": {
-    "url": "https://github.com/Solizardking/core-ai/issues"
+    "url": "https://github.com/Solizardking/clawd-cloud/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "clawd",

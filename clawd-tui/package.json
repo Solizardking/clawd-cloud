@@ -14,5 +14,13 @@
   "license": "MIT",
   "engines": {
     "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solizardking/clawd-cloud.git",
+    "directory": "clawd-tui"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

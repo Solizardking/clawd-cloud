@@ -36,9 +36,16 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Solizardking/core-ai"
+    "url": "git+https://github.com/Solizardking/clawd-cloud.git",
+    "directory": "clawd-mcp"
   },
-  "homepage": "https://github.com/Solizardking/core-ai#readme",
+  "homepage": "https://github.com/Solizardking/clawd-cloud/tree/main/clawd-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/Solizardking/clawd-cloud/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "@solana-program/system": "^0.10.0",

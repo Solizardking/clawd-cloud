@@ -79,8 +79,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/x402agent/openclawd.git",
-    "directory": "packages/clawd-wallet"
+    "url": "https://github.com/Solizardking/clawd-cloud.git",
+    "directory": "clawd-wallet"
   },
   "files": [
     "dist",
