@@ -4,6 +4,7 @@
   "description": "Clawd Cloud — complete harness for Solana and blockchain-native financial agents",
   "files": [
     "claw",
+    "clawd",
     ".env.example",
     ".gitignore",
     ".mcp.json",

@@ -8,12 +8,14 @@
     "url": "git+https://github.com/Solizardking/clawd-cloud.git"
   },
   "bin": {
-    "claw": "./claw"
+    "claw": "./claw",
+    "clawd": "./clawd"
   },
   "scripts": {
     "check:structure": "node scripts/check-structure.mjs",
     "check:secrets": "node scripts/secret-scan.mjs",
     "test:core": "node --test clawd-core/tests/*.test.mjs tailclawd/tests/*.test.mjs clawd-tui/tests/*.test.mjs clawd-character/tests/*.test.mjs clawd-goals/tests/*.test.mjs constitution/tests/*.test.mjs clawd-connectors/tests/*.test.mjs",
+    "plugin:doctor": "node scripts/plugin-doctor.mjs ./clawd-plugin",
     "stack:doctor": "node scripts/stack-doctor.mjs",
     "verify": "npm run check:structure && npm run check:secrets && npm run test:core && npm run stack:doctor",
     "compile-skills": "npx tsx scripts/compile-skills.ts",
