@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   verify:
-    name: Verify Core AI
+    name: Verify Clawd Cloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +21,7 @@ jobs:
       - run: node scripts/check-structure.mjs
       - run: node scripts/secret-scan.mjs
       - run: npm run test:core
+      - run: npm run stack:doctor
 
   clawd-mcp:
     name: Test clawd-mcp

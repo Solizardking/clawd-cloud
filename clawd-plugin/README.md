@@ -7,8 +7,8 @@ Build on Solana with Clawd Core — one install gives you live blockchain tools 
 ### From a marketplace
 
 ```
-/plugin marketplace add Solizardking/core-ai
-/plugin install clawd@clawd-core
+/plugin marketplace add Solizardking/clawd-cloud
+/plugin install clawd@clawd-cloud
 ```
 
 ### Local testing

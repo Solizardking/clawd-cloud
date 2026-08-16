@@ -1,8 +1,9 @@
 {
-  "name": "clawd-core",
-  "description": "Clawd Cloud developer tools for building on Solana",
+  "name": "clawd-cloud",
+  "description": "Clawd Cloud marketplace — plugin (skills + MCP) for Clawd Code",
   "owner": {
     "name": "Clawd",
+    "email": "beetsbyj@gmail.com",
     "url": "https://github.com/Solizardking/clawd-cloud"
   },
   "plugins": [
@@ -15,7 +16,7 @@
       "homepage": "https://github.com/Solizardking/clawd-cloud",
       "repository": "https://github.com/Solizardking/clawd-cloud",
       "license": "MIT",
-      "keywords": ["solana", "blockchain", "rpc", "nft", "defi", "web3", "clawd", "clawd-code", "lobster"]
+      "keywords": ["solana", "blockchain", "rpc", "nft", "defi", "web3", "helius", "clawd", "clawd-code", "lobster"]
     }
   ]
 }

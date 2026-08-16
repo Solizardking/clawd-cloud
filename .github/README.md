@@ -1,5 +1,13 @@
-# Package-level workflow templates
+# GitHub Actions
 
 GitHub Actions only reads `.github/` at the **repository root**.
 
-Canonical workflows for `Solizardking/clawd-cloud` live in [`../../.github/workflows`](../../.github/workflows). Files in this folder are kept as package-relative templates for anyone who vendors `core-ai/` on its own.
+Workflows for [Solizardking/clawd-cloud](https://github.com/Solizardking/clawd-cloud) live in [`workflows/`](workflows/).
+
+| Workflow | What it does |
+| --- | --- |
+| `ci.yml` | Structure, secret scan, keyless tests, stack doctor, clawd-mcp |
+| `test.yml` | clawd-mcp package tests |
+| `mcp-publish.yml` / `mcp-release.yml` | MCP package publish |
+| `verify-signed-commits.yml` | Maintainer signature check |
+| `sync-check.yml` | Generated-skill sync |

@@ -1,19 +1,15 @@
-# Publish Core AI as its own public GitHub repo
+# Publish Clawd Cloud
 
-This folder is a complete Git repository root. The Cursor integration token
-cannot create repositories, so publish from a machine that can:
+This directory **is** the public GitHub root: [Solizardking/clawd-cloud](https://github.com/Solizardking/clawd-cloud).
 
-```bash
-# from clawd-cloud
-git subtree split -P core-ai -b core-ai-public
-git push -u git@github.com:Solizardking/core-ai.git core-ai-public:main
-```
-
-If `Solizardking/core-ai` should stay untouched, create a new public repo and push the split branch as `main`:
+Before every push to `main` / `newnew`:
 
 ```bash
-gh repo create Solizardking/clawd-core-ai --public --source=. --remote=core-ai-public
-git push core-ai-public core-ai-public:main
+npm run verify
 ```
 
-Do not force-push secrets. Run `npm run verify` first.
+That checks the README map, scans for secrets, runs keyless tests, and runs `stack:doctor`.
+
+Do not force-push secrets. Do not flip `LIVE_TRADING` in committed examples.
+
+Topics that help discovery: `solana`, `mcp`, `ai-agents`, `helius`, `clawd`, `lobster`.

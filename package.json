@@ -1,11 +1,11 @@
 {
-  "name": "clawd-core-ai",
+  "name": "clawd-cloud",
   "private": true,
   "description": "Clawd Cloud — the complete harness for Solana and blockchain-native financial agents. Clawd is the identity. Helius is the pipe.",
-  "homepage": "https://github.com/Solizardking/core-ai",
+  "homepage": "https://github.com/Solizardking/clawd-cloud",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Solizardking/core-ai.git"
+    "url": "git+https://github.com/Solizardking/clawd-cloud.git"
   },
   "bin": {
     "claw": "./claw"
@@ -14,7 +14,8 @@
     "check:structure": "node scripts/check-structure.mjs",
     "check:secrets": "node scripts/secret-scan.mjs",
     "test:core": "node --test clawd-core/tests/*.test.mjs tailclawd/tests/*.test.mjs clawd-tui/tests/*.test.mjs clawd-character/tests/*.test.mjs clawd-goals/tests/*.test.mjs constitution/tests/*.test.mjs clawd-connectors/tests/*.test.mjs",
-    "verify": "npm run check:structure && npm run check:secrets && npm run test:core",
+    "stack:doctor": "node scripts/stack-doctor.mjs",
+    "verify": "npm run check:structure && npm run check:secrets && npm run test:core && npm run stack:doctor",
     "compile-skills": "npx tsx scripts/compile-skills.ts",
     "mcp:pump:build": "npm --prefix mcp-server run build",
     "mcp:pump:start": "npm --prefix mcp-server run start",

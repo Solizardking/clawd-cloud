@@ -1,20 +1,26 @@
 {
-  "name": "clawd-core-ai",
+  "name": "clawd-cloud",
   "version": "1.0.0",
   "description": "Clawd Cloud — complete harness for Solana and blockchain-native financial agents",
   "files": [
     "claw",
+    ".env.example",
     ".gitignore",
+    ".mcp.json",
     ".npmrc",
     "AGENTS.md",
     "CLAUDE.md",
     "CLAWD.md",
+    "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "glama.json",
     "LICENSE",
+    "MANIFEST.json",
+    "NOTICE.md",
     "package.json",
     "package-lock.json",
     "README.md",
+    "SECURITY.md",
     "versions.json"
   ],
   "required": [
@@ -130,6 +136,11 @@
     }
   ],
   "additional": [
+    {
+      "path": ".claude-plugin",
+      "layer": "plugin",
+      "summary": "Claude-compatible marketplace descriptor pointing at ./clawd-plugin."
+    },
     {
       "path": "clawd-cli",
       "layer": "core",

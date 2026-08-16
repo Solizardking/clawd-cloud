@@ -1,55 +1,57 @@
-# Contributing to Core AI
+# Contributing to Clawd Cloud
 
-Thank you for contributing to Clawd Core AI! This monorepo houses several independent packages:
+Thanks for helping the lobster molt in public.
 
-- `clawd-mcp/` — MCP server (npm: `clawd-mcp`)
-- `clawd-skills/` — Standalone Clawd Code skill
-- `clawd-plugin/` — Clawd Code plugin
-- `clawd-cursor/` — Cursor plugin
-- `clawd-cli/` — CLI for account setup (npm: `clawd-cli`)
-- `clawd-core/` — catalog / identity umbrella
-- `clawd-connectors/`, `clawd-wallet/`, `clawd-router/`, `zk-primitives/` — chain edge
-- `clawd-character/`, `clawd-goals/`, `constitution/` — identity
-- `tailclawd/` — operator dashboard
+## Before you start
 
-This guide covers requirements that apply to **every** contribution, no matter which package you're working on. Some packages have their own `CONTRIBUTING.md` (e.g. [`clawd-mcp/CONTRIBUTING.md`](clawd-mcp/CONTRIBUTING.md)) with package-specific build, test, and style details — read those too when working in that package.
+- Read [`README.md`](README.md) — especially how agents, identity, core, and edge talk through `./claw`.
+- Run `npm run stack:doctor` and `npm run verify` from the repo root.
+- Trading stays **PAPER** unless the user explicitly arms live mode. Do not flip that in examples or tests.
 
-Before opening a pull request against `clawd-cloud`, run `npm run verify` from this `core-ai/` directory. That checks the README map, scans for secrets, and runs keyless package tests.
+## Where to work
 
-## Signing Your Commits (Recommended)
+| Area | Path | Good first PRs |
+| --- | --- | --- |
+| Docs / README | `README.md`, `docs/` | clarity, broken links |
+| Connectors | `clawd-connectors/` | provider status, tests |
+| Plugin / skills | `clawd-plugin/`, `clawd-skills/` | skill copy, MCP registry |
+| Catalog / router | `clawd-core/`, `MANIFEST.json` | destination map |
+| MCP | `clawd-mcp/`, `mcp-server/`, `solana-mcp/` | tools, prompts |
+| Operator | `claw`, `v3/`, `tailclawd/` | doctor, cloud map |
+
+Keep changes small. Match nearby TypeScript / ESM style. Prefer existing command/tool patterns over new frameworks.
+
+This monorepo houses several independent packages. Some packages have their own `CONTRIBUTING.md` (e.g. [`clawd-mcp/CONTRIBUTING.md`](clawd-mcp/CONTRIBUTING.md)) — read those too when working in that package.
+
+## Checks
+
+```bash
+npm run stack:doctor
+npm run verify
+```
+
+`verify` checks the README map, scans for secrets, and runs keyless package tests.
+
+## Signing your commits (recommended)
 
 **Maintainers should sign commits.** A verified commit is one GitHub can cryptographically tie to a registered signing key (GPG, SSH, or S/MIME). It shows a green **Verified** badge in the GitHub UI.
 
-A "verified" commit is one GitHub can cryptographically tie to a registered signing key (GPG, SSH, or S/MIME). It shows a green **Verified** badge in the GitHub UI.
-
-### One-time setup
-
-Follow GitHub's official guide to generate a signing key and configure Git to sign your commits:
-
-**https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits**
+Follow GitHub's official guide: **https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits**
 
 The short version:
 
-1. Generate or choose a signing key (GPG or SSH) — see the guide above.
+1. Generate or choose a signing key (GPG or SSH).
 2. Add the **public** key to your GitHub account under **Settings → SSH and GPG keys**.
-3. Tell Git to use it and sign every commit automatically:
+3. Tell Git to use it:
 
    ```bash
    # SSH signing (simplest if you already have an SSH key on GitHub)
    git config --global gpg.format ssh
    git config --global user.signingkey ~/.ssh/id_ed25519.pub
    git config --global commit.gpgsign true
-
-   # — or — GPG signing
-   git config --global user.signingkey <YOUR_KEY_ID>
-   git config --global commit.gpgsign true
    ```
 
-   Use `--global` to sign across all repos, or drop it to configure just this repo.
-
-4. Confirm the email on your signing key matches a verified email on your GitHub account, otherwise commits show as **Unverified**.
-
-### Verifying it works
+4. Confirm the email on your signing key matches a verified email on your GitHub account.
 
 After committing, check the signature locally:
 
@@ -57,23 +59,22 @@ After committing, check the signature locally:
 git log --show-signature -1
 ```
 
-Once pushed, the commit should display a **Verified** badge on GitHub. If you have existing unsigned commits on a branch, you can re-sign them with:
+## Do not
 
-```bash
-git rebase --exec 'git commit --amend --no-edit -S' -i <base-branch>
-```
+- Commit `.env`, `.env.local`, keypairs, or API keys.
+- Add live-trading defaults.
+- Vendor secrets from `~/.clawd-code/`.
+- Edit generated `.agents/skills/` or `clawd-mcp/system-prompts/` by hand — change `clawd-skills/` and recompile.
 
 ## Pull Requests
 
-- Fork the repository and create a clearly scoped branch from `main` (e.g. `feat/my-feature`, `fix/bug-description`).
-- Make your changes, ensuring all commits are signed (see above).
-- Run the relevant package's build and tests before submitting (see that package's `CONTRIBUTING.md` or `CLAWD.md`).
-- Open a pull request with a clear, conventional title (e.g. `feat(mcp): ...`, `fix(cli): ...`, `docs(skills): ...`) and reference any related issues (`Closes #1234`).
+1. Fork the repository and create a clearly scoped branch from `main` (e.g. `feat/my-feature`, `fix/bug-description`).
+2. One problem per PR.
+3. Describe *why*, not a file list.
+4. Open a pull request with a conventional title (e.g. `feat(mcp): ...`, `fix(cli): ...`, `docs(skills): ...`) and reference any related issues (`Closes #1234`).
+
+Questions: open a GitHub issue on [Solizardking/clawd-cloud](https://github.com/Solizardking/clawd-cloud).
 
 ## License
 
 By contributing, you agree that your contributions will be licensed under the repository's [MIT License](LICENSE).
-
-## Thank You!
-
-Your contributions help power better tools for everyone in the Solana ecosystem. We appreciate it!

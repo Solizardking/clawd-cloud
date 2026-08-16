@@ -10,7 +10,7 @@ const coreRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 describe('clawd-core catalog', () => {
   it('loads MANIFEST.json', () => {
     const manifest = loadManifest();
-    assert.equal(manifest.name, 'clawd-core-ai');
+    assert.equal(manifest.name, 'clawd-cloud');
     assert.ok(Array.isArray(manifest.required));
     assert.ok(manifest.required.length >= 22);
   });

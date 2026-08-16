@@ -1,0 +1,33 @@
+name: Feature request
+description: Propose a change to Clawd Cloud
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - clawd-code
+        - clawd-mcp / plugin / skills
+        - clawd-connectors
+        - wallet / router / perps
+        - operator / catalog
+        - docs
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      placeholder: What does this unblock for an agent or operator?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      placeholder: Smallest change that would work. Link a MANIFEST path if you know it.
+    validations:
+      required: true

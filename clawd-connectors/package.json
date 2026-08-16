@@ -36,9 +36,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Solizardking/clawd-cloud.git",
-    "directory": "core-ai/clawd-connectors"
+    "directory": "clawd-connectors"
   },
-  "homepage": "https://github.com/Solizardking/clawd-cloud/tree/newnew/core-ai/clawd-connectors#readme",
+  "homepage": "https://github.com/Solizardking/clawd-cloud/tree/main/clawd-connectors#readme",
   "bugs": {
     "url": "https://github.com/Solizardking/clawd-cloud/issues"
   },

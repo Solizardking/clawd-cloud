@@ -21,18 +21,28 @@ Named capabilities (`chain`/`mcp`, `wallet`/`pay`, `perps`/`trade`, `memory`) ar
 
 | Package | What it does |
 |---|---|
-| `clawd-core/` | Identity / umbrella for the Clawd Core stack |
-| `clawd-mcp/` | MCP server (`npx clawd-mcp@latest`) — exposes 10 public tools total |
-| `solana-mcp/` | Official Solana documentation MCP server — RAG search + canonical docs retrieval |
-| `clawd-skills/` | Canonical skill source — `SKILL.md` + reference files for each domain |
-| `clawd-plugin/` | Clawd Code plugin — bundles skills + auto-starts MCP server |
-| `clawd-cli/` | CLI for account setup, blockchain queries, and staking |
-| `clawd-cursor/` | Cursor-compatible skill/rule package |
-| `clawd-code/` | Full Solana-native AI CLI — xAI/Anthropic/DeepSeek/OpenRouter, voice, web, arena |
+| `clawd-core/` | Identity / umbrella + Clawd Cloud catalog and router |
+| `clawd-mcp/` | MCP server (`npx clawd-mcp@latest`) — 9 routed domain tools + `expandResult` |
+| `clawd-plugin/` | Clawd Code plugin — bundles skills + auto-starts MCP |
+| `clawd-skills/` | Canonical skill source — `SKILL.md` + reference files |
+| `clawd-connectors/` | HTTP MCP connectors for DFlow, Helius, Jupiter, Birdeye |
+| `clawd-code/` | Solana-native AI CLI — code, trade, research, image, voice, arena |
+| `clawd-wallet/` | Privy embedded Solana wallet + Jupiter swaps |
+| `clawd-router/` | OpenAI-compatible LLM router with CLAWD gating and x402 |
+| `clawd-perps-agent/` | Phoenix, Vulcan, Imperial, TWAMM, on-chain MM, Telegram |
 | `clawd-grok/` | Bun-native REPL + audio + LSP + MCP + wallet runtime |
-| `membrain/` | Core AI selective memory — `membraned` gRPC daemon, SQLite/pgvector, TS/Python/OpenClawd clients |
-| `clawd-perps-agent/` | Perps agents: Phoenix Rise, Vulcan, Imperial, TWAMM, on-chain MM, Telegram |
-| `ai-training/` | LoRA fine-tuning platform, HF Jobs, W&B, wiki ingest, Solana benchmark |
+| `clawd-cli/` | Helius account setup, DAS/RPC, staking, ZK compression |
+| `clawd-cursor/` | Cursor-compatible skill/rule package |
+| `solana-mcp/` | Official Solana documentation MCP — RAG + canonical docs |
+| `mcp-server/` | Pump SDK MCP — builds transactions, does not submit |
+| `membrain/` | Selective memory — `membraned` gRPC daemon on `:9090` |
+| `zk-primitives/` | Light Protocol ZK: nullifiers, Groth16, compressed state |
+| `v3/` | Unified Clawd runtime scaffold (`./claw` entry) |
+| `constitution/` | Six laws + hash-attested Three On-Chain Laws |
+| `clawd-character/` | Eliza-compatible persona JSON |
+| `clawd-goals/` | Active mission files injected into prompts |
+| `knowledge/` | Operator facts, gotchas, patterns |
+| `tailclawd/` | Operator dashboard on `:4402` |
 
 ## Clawd Code Setup
 
@@ -42,7 +52,7 @@ Use the plugin directly:
 clawd --plugin-dir ./clawd-plugin
 ```
 
-Or configure Clawd MCP in `.clawd/settings.json`:
+Or configure Clawd MCP in `.clawd/settings.json` (or the repo-root [`.mcp.json`](.mcp.json)):
 
 ```json
 {
@@ -127,11 +137,11 @@ Set the appropriate API key env var and pass `--model`:
 ## Environment Variables
 
 - Never commit API keys to git.
+- Copy [`.env.example`](.env.example) to `.env.local`.
 - Use `HELIUS_API_KEY` for Clawd CLI / Clawd MCP (Helius cloud credential).
 - Use `~/.clawd-code/.env` with `XAI_API_KEY`, `HELIUS_API_KEY`, and `SOLANA_RPC_URL` for Clawd Code.
-- Use `WANDB_API_KEY` for W&B training tracking (ai-training/ only).
-- Use `HONCHO_API_KEY` for persistent cross-session agent memory (ai-training/memory/honcho.py).
 - Use `membrain/` (`membraned` on `:9090`) for Core AI runtime memory. Optional `MEMBRANE_API_KEY` / `MEMBRANE_ENCRYPTION_KEY`. Connect agents with `MEMBRAIN_GRPC_ENDPOINT`.
+- Trading stays paper unless `LIVE_TRADING=true`, `OPERATOR_CONFIRMED=true`, and `PERPS_SIM_ONLY=false` are all set.
 
 ## MCP Tool Usage Rules
 
@@ -149,18 +159,6 @@ Set the appropriate API key env var and pass `--model`:
 - Include `skipPreflight: true` and `maxRetries: 0` when using Sender.
 - Include a Jito tip and priority fee.
 - Use `clawdChain` + `getPriorityFeeEstimate`; do not hardcode fees.
-
-## AI Training Platform
-
-When working in `ai-training/`:
-
-- Launch training jobs with `bash scripts/launch_hf_jobs.sh a100-large`.
-- Ingest wiki SFT data with `python3 scripts/ingest_wiki_data.py --push`.
-- Run the Solana benchmark with `python3 scripts/solana_benchmark.py --model ordlibrary/DeepSolanaZKr-1`.
-- Check W&B eval status with `python3 scripts/wandb_eval.py`.
-- Use `memory/honcho.py` `AgentMemory` for persistent cross-session recall; set `HONCHO_API_KEY` for cloud storage.
-- All HF Job storage must route to `/data` bucket — `HF_HOME=/data/hf_cache`, `output_dir: /data/outputs/`.
-- Base model is `Qwen/Qwen2.5-1.5B-Instruct`; do not switch to multi-shard models without checking shard count first.
 
 ## Generated Content
 

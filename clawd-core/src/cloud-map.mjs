@@ -13,6 +13,10 @@ export const COMMUNICATION_TARGETS = {
     kind: 'plugin',
     invoke: 'read .clawd-plugin/marketplace.json',
   },
+  '.claude-plugin': {
+    kind: 'plugin',
+    invoke: 'read .claude-plugin/marketplace.json',
+  },
   '.github': {
     kind: 'ops',
     invoke: 'read .github/workflows',

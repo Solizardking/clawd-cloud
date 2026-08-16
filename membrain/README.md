@@ -15,7 +15,7 @@
 
 **Membrain** is the memory and persistence layer for **Clawd Core AI**. It gives `clawd-grok`, `clawd-code`, and the trading agents structured, revisable memory with built-in decay, trust-gated retrieval, and audit trails — purpose-built for Solana DeFi, on-chain intelligence, and financial decision-making.
 
-This package lives at [`membrain/`](./) in the Core AI monorepo. Run `membraned` beside the agent runtimes; they talk to it over gRPC (`:9090` by default). Honcho remains the optional cloud memory backend for `ai-training/` only.
+This package lives at [`membrain/`](./) in the Clawd Cloud monorepo. Run `membraned` beside the agent runtimes; they talk to it over gRPC (`:9090` by default).
 
 Instead of an append-only context window or flat text log, agents get typed memory records that can be consolidated, revised, contested, and pruned over time. This means your trading agent doesn't just remember — it **learns**.
 
@@ -186,7 +186,7 @@ func main() {
 
 ## Core AI
 
-In this monorepo, Membrain is the **runtime memory** for Clawd Core AI — not a training-job store. `ai-training/` still uses Honcho when `HONCHO_API_KEY` is set.
+In this monorepo, Membrain is the **runtime memory** for Clawd Cloud — not a training-job store.
 
 | Consumer | How it connects |
 |---|---|

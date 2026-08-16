@@ -7,15 +7,16 @@ This is the canonical Clawd harness for **Clawd Cloud**: the assembled tree of S
 ./claw cloud
 ./claw status
 ./claw route v3 chain "get slot"
+npm run stack:doctor
 ```
 
 Use this repository as Clawd-native tooling:
 
 - Run the plugin with `clawd --plugin-dir ./clawd-plugin`.
-- Configure MCP servers in `.clawd/settings.json`.
+- Configure MCP servers in [`.mcp.json`](.mcp.json) or `.clawd/settings.json`.
 - Enable ZK Compression docs with the `zkcompression` MCP server at `https://www.zkcompression.com/mcp`.
 - Install Light Protocol skills with `npx skills add Lightprotocol/skills` before compressed PDA, compressed token, or custom ZK application work.
-- Use `clawd-code` for code, trade, research, image, and voice workflows. The full TypeScript source for the CLI lives in [`./clawd-code/`](./clawd-code/) and installs with `cd clawd-code && npm install && npm run build && ./install.sh`.
+- Use `clawd-code` for code, trade, research, image, and voice workflows. The CLI lives in [`./clawd-code/`](./clawd-code/) and installs with `cd clawd-code && npm install && npm run build && ./install.sh`.
 - For Bun-native Clawd / Grok agent work (REPL, audio, LSP, MCP, wallet), use [`./clawd-grok/`](./clawd-grok/) with `bun install && bun run dev`.
 - For perps-specialized agents (Phoenix Rise, Vulcan, Imperial, TWAMM, on-chain MM), use [`./clawd-perps-agent/`](./clawd-perps-agent/) with `npm install && npm run build`.
 - The standalone [`./mcp-server/`](./mcp-server/) hosts the pump-sdk and related MCP tools. The [`./v3/`](./v3/) subfolder holds the next-generation Clawd runtime scaffold.
@@ -30,7 +31,7 @@ The `clawd-code/` CLI is the full-featured Solana-native AI coding CLI. Key capa
 
 ### Multi-Provider LLM Routing
 
-- **xAI / Grok**: `XAI_API_KEY` → `grok-4-20` (default), `grok-4.20-multi-agent` for multi-agent runs
+- **xAI / Grok**: `XAI_API_KEY` → `grok-4.6`, `grok-4.20-multi-agent` for multi-agent runs
 - **Anthropic**: `ANTHROPIC_API_KEY` → Claude Opus / Sonnet / Haiku
 - **DeepSeek**: `DEEPSEEK_API_KEY` → DeepSeek-R1, DeepSeek-V3
 - **OpenRouter**: `OPENROUTER_API_KEY` → any hosted model
@@ -69,23 +70,11 @@ Full tool suite available to agents: bash, file read/write/edit, glob, grep, web
 
 ### MCP Client
 
-Built-in MCP client (`context.ts`, `QueryEngine.ts`) connects to any MCP server in `.clawd/settings.json`. Clawd MCP, Vulcan MCP, and ZK Compression MCP all supported out of the box.
+Built-in MCP client connects to any MCP server in `.mcp.json` / `.clawd/settings.json`. Clawd MCP, Vulcan MCP, and ZK Compression MCP all supported out of the box.
 
 ### Identity / Soul (IDENTITY.md, SOUL.md)
 
 Core identity: lobster-native, Solana-first, paper-gated trading. `SOUL.md` defines the agent's character; `agent.md` the behavior contract.
-
-## AI Training Platform (ai-training/)
-
-The `ai-training/` directory is the Clawd fine-tuning platform:
-
-- **Dataset**: `solanaclawd/solana-clawd-instruct` — 30,450+ Solana/DeFi instruction-following pairs
-- **Model**: `ordlibrary/DeepSolanaZKr-1` / `solanaclawd/solana-clawd-1.5b-lora` — LoRA on `Qwen/Qwen2.5-1.5B-Instruct`
-- **Training**: HuggingFace Jobs (A100-large), TRL SFT, W&B tracking
-- **Wiki integration**: 18 SFT pairs from `clawd-autoresearch-wiki` (6 Solana domains) via `scripts/ingest_wiki_data.py`
-- **Benchmark**: 18-MCQ Solana knowledge test via `scripts/solana_benchmark.py`
-- **Memory**: Honcho-backed persistent cross-session agent memory via `memory/honcho.py`
-- **W&B eval**: Post-training Weave evaluation via `scripts/wandb_eval.py`
 
 ## $CLAWD Token
 

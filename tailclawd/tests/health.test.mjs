@@ -22,7 +22,7 @@ describe('tailclawd', () => {
       const catalog = await fetch(`http://127.0.0.1:${port}/v1/catalog`);
       assert.equal(catalog.status, 200);
       const body = await catalog.json();
-      assert.equal(body.name, 'clawd-core-ai');
+      assert.equal(body.name, 'clawd-cloud');
       assert.ok(body.required.some((p) => p.path === 'tailclawd'));
     } finally {
       server.close();

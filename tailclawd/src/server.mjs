@@ -38,7 +38,7 @@ function html(res, body) {
 
 function loadCatalog() {
   const path = join(CORE_ROOT, 'MANIFEST.json');
-  if (!existsSync(path)) return { name: 'clawd-core-ai', required: [], additional: [] };
+  if (!existsSync(path)) return { name: 'clawd-cloud', required: [], additional: [] };
   return JSON.parse(readFileSync(path, 'utf8'));
 }
 

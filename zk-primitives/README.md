@@ -153,9 +153,8 @@ cargo test-sbf
 
 ## Why this matters for the Clawd stack
 
-The `ai-training/` pipeline produces fine-tuned models. The
-`clawd-zk` primitive gives those models a verifiable on-chain
-footprint:
+Fine-tuned Clawd models get a verifiable on-chain
+footprint from the `clawd-zk` primitive:
 
 - **Provenance**: every published inference or attestation gets a
   nullifier, so the same model can't claim the same reward twice.
@@ -253,8 +252,6 @@ Original repository: `https://github.com/vs666/MinMax`
 - [`docs/INTEGRATION.md`](./docs/INTEGRATION.md) — runtime catalog integration
 - [`docs/EDGE_DISTRIBUTION.md`](./docs/EDGE_DISTRIBUTION.md) — Cloudflare install and metadata surface
 - [`docs/PIEDPIPER_ADAPTATION.md`](./docs/PIEDPIPER_ADAPTATION.md) — classical→ZK algorithm map
-- [`../ai-training/README.md`](../ai-training/README.md) — the model
-  training pipeline that produces the weights this primitive attests to
 - [`../AGENTS.md`](../AGENTS.md) — the Clawd agent catalog
 - [Light Protocol docs](https://www.zkcompression.com) — the
   underlying ZK compression framework
