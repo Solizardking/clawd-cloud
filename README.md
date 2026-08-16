@@ -232,7 +232,7 @@ Canonical list. Enforced by [`MANIFEST.json`](MANIFEST.json) and `npm run verify
 | [`clawd-core`](clawd-core) | core | Identity umbrella + machine-readable catalog | `node clawd-core/src/cli.mjs catalog` |
 | [`clawd-goals`](clawd-goals) | identity | Active mission files injected into agent prompts | `node --test clawd-goals/tests/*.test.mjs` |
 | [`clawd-mcp`](clawd-mcp) | core | MCP server — 9 routed domain tools + `expandResult` | `npx clawd-mcp@latest` |
-| [`clawd-plugin`](clawd-plugin) | plugin | Clawd Code plugin: skills + auto-start MCP | `clawd --plugin-dir ./clawd-plugin` |
+| [`clawd-plugin`](clawd-plugin) | plugin | Clawd Code plugin: skills + auto-start MCP | `./clawd --plugin-dir ./clawd-plugin` |
 | [`clawd-router`](clawd-router) | edge | OpenAI-compatible LLM router, CLAWD gating, x402 | `cd clawd-router && npm install && npm start` |
 | [`clawd-skills`](clawd-skills) | core | Canonical `SKILL.md` source | `./clawd-skills/clawd/install.sh` |
 | [`clawd-tui`](clawd-tui) | agents | Terminal operator (doctor/theme) + upstream TUI | `node clawd-tui/src/cli.mjs doctor` |
@@ -264,6 +264,7 @@ Canonical list. Enforced by [`MANIFEST.json`](MANIFEST.json) and `npm run verify
 | File | What it is |
 |---|---|
 | [`claw`](claw) | Public operator launcher → `v3` runtime |
+| [`clawd`](clawd) | Same operator — so `./clawd --plugin-dir ./clawd-plugin` works without a global install |
 | [`.env.example`](.env.example) | Operator env template — copy to `.env.local` |
 | [`.mcp.json`](.mcp.json) | Root MCP registry (DFlow, Helius, Jupiter, Birdeye, clawd-mcp) |
 | [`.gitignore`](.gitignore) | Secrets, `node_modules`, build output |
