@@ -28,6 +28,7 @@ console.log('Clawd Cloud stack doctor\n');
 
 check('MANIFEST.json', 'catalog');
 check('claw', 'operator');
+check('clawd', 'clawd alias');
 check('clawd-plugin', 'plugin');
 check('.claude-plugin/marketplace.json', 'Claude marketplace');
 check('.clawd-plugin/marketplace.json', 'Clawd marketplace');
@@ -54,7 +55,18 @@ const plugin = JSON.parse(readFileSync(rel('.claude-plugin/marketplace.json'), '
 if (plugin.plugins?.[0]?.source !== './clawd-plugin') {
   failures.push('.claude-plugin marketplace source must be ./clawd-plugin');
 } else {
-  console.log('  Plugin        clawd --plugin-dir ./clawd-plugin');
+  console.log('  Plugin        ./clawd --plugin-dir ./clawd-plugin');
+}
+
+const pluginDoctor = spawnSync(process.execPath, [rel('scripts/plugin-doctor.mjs'), './clawd-plugin'], {
+  encoding: 'utf8',
+  timeout: 10_000,
+});
+if (pluginDoctor.status !== 0) {
+  failures.push(`plugin doctor failed:\n${pluginDoctor.stdout || pluginDoctor.stderr}`);
+} else {
+  const skillsLine = (pluginDoctor.stdout || '').split('\n').find((l) => l.includes('skills'));
+  console.log(`  ${skillsLine?.trim() || 'Plugin doctor ok'}`);
 }
 
 const help = spawnSync(rel('claw'), ['--help'], { encoding: 'utf8', timeout: 15_000 });
@@ -107,6 +119,6 @@ if (failures.length) {
 console.log('Stack OK — plugin, MCP registry, operator, and catalog can see each other.\n');
 console.log('  Next:');
 console.log('    ./claw cloud');
-console.log('    clawd --plugin-dir ./clawd-plugin');
+console.log('    ./clawd --plugin-dir ./clawd-plugin');
 console.log('    npm run verify');
 console.log('');

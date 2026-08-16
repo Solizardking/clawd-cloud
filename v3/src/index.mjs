@@ -25,6 +25,7 @@ import { LocalGallery } from './storage/gallery.mjs';
 import { createDefaultAdapters } from '../../clawd-core/src/adapters.mjs';
 import { formatCloudStatus, loadCloudRegistry } from '../../clawd-core/src/registry.mjs';
 import { routeMessage } from '../../clawd-core/src/router.mjs';
+import { doctorPlugin, formatPluginDoctor } from '../../scripts/plugin-doctor.mjs';
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
@@ -78,6 +79,14 @@ function buildHeliusUrl() {
 function getFlag(args, flag) {
     const idx = args.indexOf(flag);
     return idx !== -1 && args[idx + 1] ? args[idx + 1] : null;
+}
+
+function takeFlag(args, flag) {
+    const idx = args.indexOf(flag);
+    if (idx === -1) return { args, value: null };
+    const value = args[idx + 1] && !args[idx + 1].startsWith('-') ? args[idx + 1] : null;
+    const next = args.filter((_, i) => i !== idx && !(value && i === idx + 1));
+    return { args: next, value };
 }
 
 function repoRoot() {
@@ -152,7 +161,8 @@ function printUsage() {
         .join(', ');
     console.log(`
 USAGE:
-  clawd [mode] [args] [options]
+  ./claw [mode] [args] [options]
+  ./clawd [mode] [args] [options]
 
 CLAWD CLOUD:
   This tree is the complete Clawd Cloud harness for Solana financial agents.
@@ -175,6 +185,7 @@ COMMANDS (alias-friendly):
   /models    List models / switch model
   /provider  Show or switch AI provider
   /gallery   Show image gallery status
+  plugin     Doctor the local clawd-plugin bundle (skills + MCP)
   legacy     Delegate to the original TypeScript clawd-code CLI
   grok       Delegate to the Bun-based clawd-grok runtime
   mcp        Start the Pump MCP server from this monorepo
@@ -192,11 +203,12 @@ EXAMPLES:
   clawd legacy code "Build a Jupiter swap bot"
   clawd grok --prompt "show me SOL perps orderbook depth"
   clawd mcp --http
-  clawd cloud
-  clawd status
-  clawd route v3 chain "get slot"
+  ./claw cloud
+  ./clawd --plugin-dir ./clawd-plugin
+  ./claw route v3 chain "get slot"
 
 OPTIONS:
+  --plugin-dir <path> Load/doctor a plugin directory (default ./clawd-plugin)
   --provider <name>   xai | anthropic | openrouter | deepseek
   --model <id>        Override model for this run
   --stream            Stream tokens token-by-token
@@ -265,7 +277,23 @@ function runVerify() {
 
 async function main() {
     loadEnv();
-    const args = process.argv.slice(2);
+    let args = process.argv.slice(2);
+    const pluginFlag = takeFlag(args, '--plugin-dir');
+    args = pluginFlag.args;
+    const pluginDir = pluginFlag.value || (args[0] === 'plugin' ? (args[1] && !args[1].startsWith('-') ? args[1] : './clawd-plugin') : null);
+    const pluginOnly = args[0] === 'plugin' || Boolean(pluginFlag.value);
+
+    if (pluginOnly) {
+        const dir = pluginDir || './clawd-plugin';
+        const result = doctorPlugin(dir, repoRoot());
+        process.stdout.write(formatPluginDoctor(result, dir));
+        if (!result.ok) process.exit(1);
+        const rest = args[0] === 'plugin' ? args.slice(args[1] && !args[1].startsWith('-') ? 2 : 1) : args;
+        if (rest.length === 0 || rest.includes('--help') || rest.includes('-h')) {
+            process.exit(0);
+        }
+        args = rest;
+    }
 
     if (args[0] === 'legacy' || args[0] === 'clawd-code') {
         const code = await runDelegatedRuntime('clawd-code', args.slice(1));

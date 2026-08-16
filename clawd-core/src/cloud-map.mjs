@@ -51,7 +51,7 @@ export const COMMUNICATION_TARGETS = {
   },
   'clawd-plugin': {
     kind: 'plugin',
-    invoke: 'clawd --plugin-dir ./clawd-plugin',
+    invoke: './clawd --plugin-dir ./clawd-plugin',
   },
   'clawd-router': {
     kind: 'http',

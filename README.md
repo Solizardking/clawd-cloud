@@ -40,11 +40,11 @@
 ```bash
 git clone https://github.com/Solizardking/clawd-cloud.git
 cd clawd-cloud
-chmod +x claw
+chmod +x claw clawd
 cp .env.example .env.local          # add HELIUS_API_KEY (and any LLM keys)
 npm run stack:doctor                # prove plugin, MCP, operator, catalog can see each other
 ./claw cloud                        # destinations + capabilities + routes
-clawd --plugin-dir ./clawd-plugin
+./clawd --plugin-dir ./clawd-plugin
 ```
 
 Or skip the checkout and run the MCP server:
