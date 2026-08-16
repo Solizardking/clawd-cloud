@@ -56,7 +56,7 @@ npx clawd-mcp@latest
 > **Trading is PAPER by default.** Live orders require `LIVE_TRADING=true`, `OPERATOR_CONFIRMED=true`, and `PERPS_SIM_ONLY=false`. Never commit `.env` / `.env.local`.
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&duration=1800&pause=400&color=14F195&center=true&vCenter=true&repeat=true&width=780&height=28&lines=%24+npm+run+stack%3Adoctor;%24+.%2Fclaw+cloud;%24+clawd+--plugin-dir+.%2Fclawd-plugin;%24+clawd-code+trade+%22SOL+funding+rate%22" alt="commands" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&duration=1800&pause=400&color=14F195&center=true&vCenter=true&repeat=true&width=780&height=28&lines=%24+npm+run+stack%3Adoctor;%24+.%2Fclaw+cloud;%24+.%2Fclawd+--plugin-dir+.%2Fclawd-plugin;%24+clawd-code+trade+%22SOL+funding+rate%22" alt="commands" />
 </p>
 
 <img src="docs/assets/clawd-boot.svg" alt="Animated Clawd Cloud boot terminal" width="100%">
