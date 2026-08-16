@@ -14,7 +14,7 @@ Build on Solana with Clawd Core — one install gives you live blockchain tools 
 ### Local testing
 
 ```bash
-clawd --plugin-dir ./clawd-plugin
+./clawd --plugin-dir ./clawd-plugin
 ```
 
 ## What's included

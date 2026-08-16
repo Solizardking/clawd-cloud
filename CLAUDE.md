@@ -6,7 +6,7 @@ The effective agent harness is Clawd-native; prefer [`AGENTS.md`](./AGENTS.md) a
 When this file is loaded:
 
 - Treat this repository as Clawd Cloud, the complete harness for Solana and blockchain-native financial agents.
-- Use `clawd --plugin-dir ./clawd-plugin` for the plugin workflow.
+- Use `./clawd --plugin-dir ./clawd-plugin` for the plugin workflow.
 - Configure MCP servers in [`.mcp.json`](.mcp.json) or `.clawd/settings.json`.
 - Read domain skills from `.agents/skills/` or canonical sources in `clawd-skills/`.
 - Use `clawd-code` for code, trade, research, image, and voice workflows.

@@ -46,10 +46,10 @@ Named capabilities (`chain`/`mcp`, `wallet`/`pay`, `perps`/`trade`, `memory`) ar
 
 ## Clawd Code Setup
 
-Use the plugin directly:
+Use the plugin directly from this checkout (no global `clawd` required):
 
 ```bash
-clawd --plugin-dir ./clawd-plugin
+./clawd --plugin-dir ./clawd-plugin
 ```
 
 Or configure Clawd MCP in `.clawd/settings.json` (or the repo-root [`.mcp.json`](.mcp.json)):

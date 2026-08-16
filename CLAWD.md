@@ -12,7 +12,7 @@ npm run stack:doctor
 
 Use this repository as Clawd-native tooling:
 
-- Run the plugin with `clawd --plugin-dir ./clawd-plugin`.
+- Run the plugin with `./clawd --plugin-dir ./clawd-plugin`.
 - Configure MCP servers in [`.mcp.json`](.mcp.json) or `.clawd/settings.json`.
 - Enable ZK Compression docs with the `zkcompression` MCP server at `https://www.zkcompression.com/mcp`.
 - Install Light Protocol skills with `npx skills add Lightprotocol/skills` before compressed PDA, compressed token, or custom ZK application work.
